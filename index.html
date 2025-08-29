@@ -288,7 +288,22 @@
                 </div>
                 
                 <div class="bg-dark-light rounded-2xl p-6 md:p-10 border border-primary/20 max-w-4xl mx-auto">
-
+                    
+                    <!-- 教程按钮区域 -->
+                    <div class="mb-8 flex flex-col sm:flex-row gap-4">
+                        <a href="https://b23.tv/6OcDGox" target="_blank" class="px-6 py-3 rounded-lg bg-primary/10 border border-primary/30 hover:bg-primary/20 transition-colors text-center inline-block">
+                            <span class="en font-medium">XDOG Purchase Guide</span>
+                            <span class="zh hidden font-medium">XDOG购买教程</span>
+                        </a>
+                        <a href="https://b23.tv/G589lry" target="_blank" class="px-6 py-3 rounded-lg bg-primary/10 border border-primary/30 hover:bg-primary/20 transition-colors text-center inline-block">
+                            <span class="en font-medium">Referral Code Guide</span>
+                            <span class="zh hidden font-medium">返佣邀请码添加教程</span>
+                        </a>
+                        <a href="https://b23.tv/QmyKRcF" target="_blank" class="px-6 py-3 rounded-lg bg-primary/10 border border-primary/30 hover:bg-primary/20 transition-colors text-center inline-block">
+                            <span class="en font-medium">Liquidity Adding Guide</span>
+                            <span class="zh hidden font-medium">流动性添加教程</span>
+                        </a>
+                    </div>
                     
                     <!-- 图片画廊 -->
                     <div class="gallery-container">
@@ -344,11 +359,11 @@
                     <!-- 左侧：步骤说明 -->
                     <div>
                         <div class="space-y-8">
-                            <div class="bg-dark rounded-xl overflow-hidden border border-primary/20 hover:border-primary/50 transition-colors cursor-pointer" onclick="window.location.href='#dex'">
+                            <div class="bg-dark rounded-xl overflow-hidden border border-primary/20 hover:border-primary/50 transition-colors cursor-pointer" onclick="openImageViewer('OKXbridge/ETH2XDOG.jpg', 'ETH to XDOG Bridge')">
                                     <img src="OKXbridge/ETH2XDOG.jpg" alt="ETH to XDOG Bridge" class="w-full h-auto object-cover hover:scale-[1.02] transition-transform duration-300">
                                 </div>
                                 
-                                <div class="bg-dark rounded-xl overflow-hidden border border-primary/20 hover:border-primary/50 transition-colors cursor-pointer" onclick="window.location.href='#dex'">
+                                <div class="bg-dark rounded-xl overflow-hidden border border-primary/20 hover:border-primary/50 transition-colors cursor-pointer" onclick="openImageViewer('OKXbridge/USDConSOL2XDOG.jpg', 'USDC on Solana to XDOG Bridge')">
                                     <img src="OKXbridge/USDConSOL2XDOG.jpg" alt="USDC on Solana to XDOG Bridge" class="w-full h-auto object-cover hover:scale-[1.02] transition-transform duration-300">
                                 </div>
                         </div>
@@ -566,7 +581,7 @@
                             <i class="fa fa-twitter"></i>
                         </a>
 
-                        <a href="t.me/okbokbokx" class="w-10 h-10 rounded-full bg-dark flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary/20 transition-colors">
+                        <a href="#" onclick="copyTgLink(); return false;" class="w-10 h-10 rounded-full bg-dark flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary/20 transition-colors cursor-pointer">
                             <i class="fa fa-telegram"></i>
                         </a>
                     </div>
@@ -605,7 +620,7 @@
                     </h4>
                     
                     <ul class="space-y-3">
-                        <li><a href="docs/XDOG_WHITE_PAPER_V1.0.pdf" class="text-gray-400 hover:text-secondary transition-colors" target="_blank">
+                        <li><a href="#" onclick="openWhitepaper(); return false;" class="text-gray-400 hover:text-secondary transition-colors cursor-pointer">
                             <span class="en">Whitepaper</span>
                             <span class="zh hidden">白皮书</span>
                         </a></li>
@@ -1244,6 +1259,55 @@
 
         // 初始化画廊
         updateGalleryImage(currentIndex);
+
+        // 复制Telegram链接函数
+        function copyTgLink() {
+            const tgLink = 't.me/okbokbokx';
+            
+            // 创建临时元素用于复制
+            const tempInput = document.createElement('input');
+            tempInput.value = tgLink;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            
+            // 显示提示信息
+            showCopyMessage();
+        }
+
+        // 显示复制成功提示
+        function showCopyMessage() {
+            // 检查当前是否为中文模式
+            const isChineseMode = document.querySelector('.zh:not(.hidden)') !== null;
+            
+            // 创建提示元素
+            const messageElement = document.createElement('div');
+            messageElement.className = 'fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-primary text-white px-6 py-3 rounded-lg shadow-lg z-50 transition-opacity duration-300';
+            messageElement.textContent = isChineseMode ? '电报频道已复制到剪切板' : 'tg channel has copied';
+            
+            document.body.appendChild(messageElement);
+            
+            // 2秒后移除提示
+            setTimeout(() => {
+                messageElement.style.opacity = '0';
+                setTimeout(() => {
+                    document.body.removeChild(messageElement);
+                }, 300);
+            }, 2000);
+        }
+
+        // 根据语言模式打开对应版本的白皮书
+        function openWhitepaper() {
+            // 检查当前是否为中文模式
+            const isChineseMode = document.querySelector('.zh:not(.hidden)') !== null;
+            
+            // 根据语言模式选择对应的PDF文件
+            const pdfPath = isChineseMode ? 'docs/XDOG_WHITE_PAPER_CN_V1.0.pdf' : 'docs/XDOG_WHITE_PAPER_EN_V1.0.pdf';
+            
+            // 在新窗口中打开PDF
+            window.open(pdfPath, '_blank');
+        }
     </script>
 
 </body></html>
