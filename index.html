@@ -1,0 +1,1249 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <!-- 视口设置 - 优化移动设备显示 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>XDOG - The Ultimate Meme Coin</title>
+    <!-- 网站图标设置 -->
+    <link rel="icon" type="image/jpeg" href="images/XDOGlogo.jpg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        // Tailwind配置
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#6C5CE7', // 主色调：紫色，代表创新与独特
+                        secondary: '#00F5D4', // 辅助色：亮青色，用于强调和交互元素
+                        dark: '#121212', // 深色背景
+                        'dark-light': '#1E1E1E', // 稍亮的深色，用于卡片等
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        display: ['Poppins', 'system-ui', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 3s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                },
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 0 0 10px rgba(108, 92, 231, 0.5);
+            }
+            .glow {
+                box-shadow: 0 0 15px rgba(0, 245, 212, 0.5);
+            }
+            .bg-grid {
+                background-image: radial-gradient(rgba(108, 92, 231, 0.1) 1px, transparent 1px);
+                background-size: 20px 20px;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Poppins:wght@500;600;700;800&amp;display=swap" rel="stylesheet">
+</head>
+<body class="bg-dark text-white font-sans overflow-x-hidden">
+    <!-- 加载动画视频 -->
+    <div id="loadingScreen" class="fixed inset-0 bg-black z-50 flex items-center justify-center">
+        <div id="loadingContainer" class="w-full h-full flex items-center justify-center">
+            <video id="loadingVideo" autoplay muted loop preload="auto" class="w-full h-full object-contain max-w-[100vw] max-h-[100vh]">
+                <source src="images/XDOG_open_video.mp4" type="video/mp4">
+                您的浏览器不支持视频播放。
+            </video>
+            <!-- 视频加载失败时的备用内容 -->
+            <div id="fallbackLoader" class="hidden absolute inset-0 flex items-center justify-center flex-col bg-black">
+                <img src="images/XDOGlogo.jpg" alt="XDOG Logo" class="w-40 h-40 animate-pulse-slow">
+                <p class="mt-4 text-gray-300">正在加载XDOG...</p>
+            </div>
+        </div>
+    </div>
+    <!-- 导航栏 -->
+    <header class="fixed w-full z-50 transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div id="logoDiv" class="flex items-center space-x-2 cursor-pointer hover:text-secondary transition-colors">
+                <div class="w-10 h-10 rounded-full overflow-hidden">
+                    <img src="images/XDOGlogo.jpg" alt="XDOG Logo" class="w-full h-full object-contain">
+                </div>
+                <span id="navbarXdogSpan" class="font-display font-bold text-xl md:text-2xl cursor-pointer hover:text-secondary transition-colors">XDOG</span>
+            </div>
+            
+            <!-- 桌面导航 -->
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#about" class="nav-link hover:text-secondary transition-colors">
+                    <span class="en">About</span>
+                    <span class="zh hidden">关于</span>
+                </a>
+                <a href="#okx" class="nav-link hover:text-secondary transition-colors">
+                    <span class="en">OKX Guide</span>
+                    <span class="zh hidden">OKX指南</span>
+                </a>
+                <a href="#dex" class="nav-link hover:text-secondary transition-colors">
+                    <span class="en">Web3 OKX BRIDGE Guide</span>
+                    <span class="zh hidden">Web3欧意交易所跨链桥使用指南</span>
+                </a>
+                <a href="#media" class="nav-link hover:text-secondary transition-colors">
+                    <span class="en">Media</span>
+                    <span class="zh hidden">媒体</span>
+                </a>
+                <button id="langToggle" class="flex items-center space-x-1 px-3 py-1 rounded-full border border-primary/30 hover:border-secondary transition-colors">
+                    <span class="en">中文</span>
+                    <span class="zh hidden">English</span>
+                </button>
+            </nav>
+            
+            <!-- 移动端菜单按钮 -->
+            <button id="menuToggle" class="md:hidden text-2xl">
+                <i class="fa fa-bars"></i>
+            </button>
+        </div>
+        
+        <!-- 移动端导航菜单 -->
+        <div id="mobileMenu" class="md:hidden bg-dark-light absolute w-full left-0 top-full py-4 px-4 hidden">
+            <div class="flex flex-col space-y-4">
+                <a href="#about" class="mobile-nav-link hover:text-secondary transition-colors py-2">
+                    <span class="en">About</span>
+                    <span class="zh hidden">关于</span>
+                </a>
+                <a href="#okx" class="mobile-nav-link hover:text-secondary transition-colors py-2">
+                    <span class="en">OKX Guide</span>
+                    <span class="zh hidden">OKX指南</span>
+                </a>
+                <a href="#dex" class="mobile-nav-link hover:text-secondary transition-colors py-2">
+                    <span class="en">Web3 OKX BRIDGE Guide</span>
+                    <span class="zh hidden">Web3欧意交易所跨链桥使用指南</span>
+                </a>
+                <a href="#media" class="mobile-nav-link hover:text-secondary transition-colors py-2">
+                    <span class="en">Media</span>
+                    <span class="zh hidden">媒体</span>
+                </a>
+                <button id="mobileLangToggle" class="flex items-center space-x-1 px-3 py-2 rounded-full border border-primary/30 hover:border-secondary transition-colors w-fit">
+                    <span class="en">中文</span>
+                    <span class="zh hidden">English</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- 英雄区 -->
+        <section class="min-h-screen pt-24 pb-16 bg-grid relative overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-b from-primary/10 to-transparent pointer-events-none"></div>
+            
+            <!-- 装饰元素 -->
+            <div class="absolute -top-20 -left-20 w-64 h-64 bg-primary/20 rounded-full blur-3xl"></div>
+            <div class="absolute top-1/3 -right-32 w-80 h-80 bg-secondary/10 rounded-full blur-3xl"></div>
+            
+            <div class="container mx-auto px-4 relative z-10">
+                <div class="flex flex-col items-center text-center">
+                    <!-- XDOG Logo 位置 -->
+                    <div class="w-40 h-40 md:w-64 md:h-64 bg-dark-light rounded-full flex items-center justify-center mb-8 animate-float border border-primary/30">
+                        <img src="images/XDOGGOLDcoin.png" alt="XDOGGOLDcoin" class="w-full h-full object-contain">
+                    </div>
+                    
+                    <h1 class="font-display font-bold text-4xl md:text-6xl lg:text-7xl mb-6 text-shadow">
+                        <span class="en">THE ULTIMATE MEME REVOLUTION</span>
+                        <span class="zh hidden">终极MEME革命</span>
+                    </h1>
+                    
+                    <p class="text-xl md:text-2xl text-gray-300 max-w-3xl mb-10">
+                        <span class="en">Join the movement that's taking the crypto world by storm</span>
+                        <span class="zh hidden">加入这场席卷加密货币世界的运动</span>
+                    </p>
+                    
+                    <!-- 哈希地址 -->
+                    <div class="bg-dark-light p-4 rounded-lg border border-primary/30 mb-10 max-w-md w-full flex items-center">
+                        <i class="fa fa-link text-primary mr-3"></i>
+                        <span class="font-mono text-sm md:text-base truncate">0x0cc24c51bf89c00c5affbfcf5e856c25ecbdb48e</span>
+                        <button class="ml-3 text-gray-400 hover:text-secondary transition-colors" onclick="copyHash()">
+                            <i class="fa fa-copy"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#about" class="px-8 py-3 bg-primary hover:bg-primary/80 rounded-full font-medium transition-all transform hover:scale-105">
+                            <span class="en">Learn More</span>
+                            <span class="zh hidden">了解更多</span>
+                        </a>
+                        <a href="#okx" class="px-8 py-3 bg-transparent border border-secondary text-secondary hover:bg-secondary/10 rounded-full font-medium transition-all transform hover:scale-105">
+                            <span class="en">Get Started</span>
+                            <span class="zh hidden">立即开始</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 滚动提示 -->
+            <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+                <i class="fa fa-angle-down text-2xl text-gray-400"></i>
+            </div>
+        </section>
+
+        <!-- 关于XDOG -->
+        <section id="about" class="py-20 bg-dark-light relative">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16">
+                    <h2 class="font-display font-bold text-3xl md:text-5xl mb-4">
+                        <span id="aboutXdogSpan" class="en cursor-pointer hover:text-secondary transition-colors">About XDOG</span>
+                        <span id="aboutXdogSpanZh" class="zh hidden cursor-pointer hover:text-secondary transition-colors">关于XDOG</span>
+                    </h2>
+                    <div class="w-20 h-1 bg-primary mx-auto"></div>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="order-2 md:order-1">
+                        <h3 class="font-display font-semibold text-2xl md:text-3xl mb-6">
+                            <span class="en">The Origin Story</span>
+                            <span class="zh hidden">起源故事</span>
+                        </h3>
+                        
+                        <div class="space-y-6 text-gray-300">
+                            <p>
+                                <span class="en">XDOG originated from the primordial chaos of the X Layer, born from the collective creativity of meme enthusiasts and X-chain cryptocurrency pioneers. Starting with a simple image of a dog, it rapidly evolved into a global phenomenon.</span>
+                                <span class="zh hidden">XDOG源自X layer原初混沌，诞生于meme爱好者和X链加密货币先驱的集体创造力。从一个简单的狗狗图片开始，迅速演变成全球现象。</span>
+                            </p>
+                            
+                            <p>
+                                <span class="en">By fusing the finest essence of meme culture—Doge—with the revolutionary potential of OKX’s native X-Layer blockchain technology, XDOG is destined to become the eye of the storm on the X-chain, sweeping through the entire crypto universe.</span>
+                                <span class="zh hidden">XDOG融合了meme文化的最佳元素doge和OKX自有公链X链区块链技术的革命性潜力，XDOG必将从X链上形成台风眼，席卷整个加密世界。</span>
+                            </p>
+                            
+                            <p>
+                                <span class="en">Our community is built on the principles of fun, inclusivity, and financial empowerment. Anyone can join the XDOG movement, regardless of their background or experience with cryptocurrency.</span>
+                                <span class="zh hidden">我们的社区建立在乐趣、包容性和financial empowerment的原则之上。无论背景如何，无论是否有加密货币经验，任何人都可以加入XDOG运动。</span>
+                            </p>
+                        </div>
+                        
+                        <div class="mt-8 flex items-center space-x-6">
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mr-3">
+                                    <i class="fa fa-users text-primary text-xl"></i>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-2xl">12K+</div>
+                                    <div class="text-gray-400 text-sm">
+                                        <span class="en">Community</span>
+                                        <span class="zh hidden">社区成员</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mr-3">
+                                    <i class="fa fa-exchange text-primary text-xl"></i>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-2xl">10K+</div>
+                                    <div class="text-gray-400 text-sm">
+                                        <span class="en">Holders</span>
+                                        <span class="zh hidden">持有地址</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 预留XDOG图片位置 -->
+                    <div class="order-1 md:order-2">
+                        <div class="relative">
+                            <div class="aspect-square bg-dark rounded-xl overflow-hidden border border-primary/30 glow">
+                                <img src="images/XDOG_joinus.jpg" alt="XDOG_joinus" class="w-full h-full object-cover">
+                            </div>
+                            
+                            <!-- 装饰元素 -->
+                            <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-secondary/20 rounded-lg -z-10"></div>
+                            <div class="absolute -top-6 -left-6 w-32 h-32 bg-primary/20 rounded-lg -z-10"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- OKX操作指南 -->
+        <section id="okx" class="py-20 bg-dark relative">
+            <div class="absolute inset-0 bg-grid opacity-50"></div>
+            
+            <div class="container mx-auto px-4 relative z-10">
+                <div class="text-center mb-16">
+                    <h2 class="font-display font-bold text-3xl md:text-5xl mb-4">
+                        <span class="en">OKX Guide</span>
+                        <span class="zh hidden">OKX操作指南</span>
+                    </h2>
+                    <p class="text-gray-400 max-w-2xl mx-auto">
+                        <span class="en">Step-by-step instructions on how to buy and trade XDOG on OKX</span>
+                        <span class="zh hidden">如何在OKX上购买和交易XDOG的详细步骤指南</span>
+                    </p>
+                </div>
+                
+                <div class="bg-dark-light rounded-2xl p-6 md:p-10 border border-primary/20 max-w-4xl mx-auto">
+
+                    
+                    <!-- 图片画廊 -->
+                    <div class="gallery-container">
+                        <div class="relative">
+                            <!-- 画廊图片容器 -->
+                            <div id="gallery" class="rounded-xl overflow-hidden bg-dark border border-gray-700 aspect-video">
+                                <!-- 初始显示的图片 -->
+                                <img id="galleryImage" src="OKXuse/step1.jpg" alt="OKX Registration Screen" class="w-full h-full object-contain">
+                            </div>
+                            
+                            <!-- 图片标题 -->
+                            <div class="mt-4 text-center">
+                                <h3 id="galleryCaption" class="font-display font-semibold text-xl">
+                                    <span class="en">OKX Registration Screen</span>
+                                    <span class="zh hidden">OKX注册界面</span>
+                                </h3>
+                            </div>
+                        </div>
+                        
+                        <!-- 导航按钮 -->
+                        <div class="mt-6 flex justify-between">
+                            <button id="prevBtn" class="px-4 py-2 rounded-lg bg-dark border border-gray-700 text-gray-400 cursor-not-allowed">
+                                <i class="fa fa-angle-left mr-2"></i>
+                                <span class="en">Previous</span>
+                                <span class="zh hidden">上一张</span>
+                            </button>
+                            <button id="nextBtn" class="px-6 py-2 rounded-lg bg-primary hover:bg-primary/80 transition-colors">
+                                <span class="en">Next</span>
+                                <span class="zh hidden">下一张</span>
+                                <i class="fa fa-angle-right ml-2"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Web3 DEX操作指南 -->
+        <section id="dex" class="py-20 bg-dark-light relative">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16">
+                    <h2 class="font-display font-bold text-3xl md:text-5xl mb-4">
+                        <span class="en">Web3 OKX BRIDGE Guide</span>
+                        <span class="zh hidden">Web3欧意交易所跨链桥使用指南</span>
+                    </h2>
+                    <p class="text-gray-400 max-w-2xl mx-auto">
+                        <span class="en">How to trade XDOG through OKX BRIDGE</span>
+                        <span class="zh hidden">如何在通过OKX跨链桥交易XDOG</span>
+                    </p>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-12">
+                    <!-- 左侧：步骤说明 -->
+                    <div>
+                        <div class="space-y-8">
+                            <div class="bg-dark rounded-xl overflow-hidden border border-primary/20 hover:border-primary/50 transition-colors cursor-pointer" onclick="window.location.href='#dex'">
+                                    <img src="OKXbridge/ETH2XDOG.jpg" alt="ETH to XDOG Bridge" class="w-full h-auto object-cover hover:scale-[1.02] transition-transform duration-300">
+                                </div>
+                                
+                                <div class="bg-dark rounded-xl overflow-hidden border border-primary/20 hover:border-primary/50 transition-colors cursor-pointer" onclick="window.location.href='#dex'">
+                                    <img src="OKXbridge/USDConSOL2XDOG.jpg" alt="USDC on Solana to XDOG Bridge" class="w-full h-auto object-cover hover:scale-[1.02] transition-transform duration-300">
+                                </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 右侧：图片和哈希 -->
+                    <div>
+                        <!-- 多层桥支持图片 -->
+                        <div class="bg-dark rounded-xl overflow-hidden border border-primary/20 hover:border-primary/50 transition-colors cursor-pointer mb-8" onclick="openImageViewer('OKXbridge/multi_layers_bridge_support.jpg', 'Multi-Layers Bridge Support')">
+                            <img src="OKXbridge/multi_layers_bridge_support.jpg" alt="Multi-Layers Bridge Support" class="w-full h-auto object-cover hover:scale-[1.02] transition-transform duration-300">
+                        </div>
+                        
+                        <!-- 预留DEX界面图片 -->
+                        <div class="rounded-xl overflow-hidden bg-dark border border-primary/30 mb-8 aspect-video">
+                            <div class="w-full h-full flex items-center justify-center">
+                                <a href="https://web3.okx.com/zh-hans/dex-swap/bridge?chain=solana,x-layer&token=11111111111111111111111111111111,0x0cc24c51bf89c00c5affbfcf5e856c25ecbdb48e" class="bg-primary hover:bg-primary/90 text-dark font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105" target="_blank">
+                                    <span class="en">CLICK HERE TO OKX BRIDGE</span>
+                                    <span class="zh hidden">点击此处访问OKX跨链桥</span>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- 合约地址卡片 -->
+                        <div class="bg-dark p-6 rounded-xl border border-primary/30">
+                            <h3 class="font-display font-semibold text-xl mb-4">
+                                <span class="en">XDOG Contract Address</span>
+                                <span class="zh hidden">XDOG合约地址</span>
+                            </h3>
+                            
+                            <div class="bg-dark-light p-4 rounded-lg border border-gray-700 mb-4 flex items-center">
+                                <i class="fa fa-code text-primary mr-3"></i>
+                                <span class="font-mono text-sm truncate">0x0cc24c51bf89c00c5affbfcf5e856c25ecbdb48e</span>
+                                <button class="ml-3 text-gray-400 hover:text-secondary transition-colors" onclick="copyHash()">
+                                    <i class="fa fa-copy"></i>
+                                </button>
+                            </div>
+                            
+                            <p class="text-gray-400 text-sm mb-4">
+                                <span class="en">Always verify the contract address before trading to avoid scams.</span>
+                                <span class="zh hidden">交易前务必验证合约地址，以避免诈骗。</span>
+                            </p>
+                            
+                            <a href="https://www.oklink.com/zh-hans/x-layer/address/0x0cc24c51bf89c00c5affbfcf5e856c25ecbdb48e/event" class="inline-flex items-center text-secondary hover:underline" target="_blank">
+                                <span class="en">Verify on Block Explorer</span>
+                                <span class="zh hidden">在区块浏览器验证</span>
+                                <i class="fa fa-external-link ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 媒体展示区 -->
+        <section id="media" class="py-20 bg-dark relative">
+            <div class="absolute inset-0 bg-grid opacity-50"></div>
+            
+            <div class="container mx-auto px-4 relative z-10">
+                <div class="text-center mb-16">
+                    <h2 class="font-display font-bold text-3xl md:text-5xl mb-4">
+                        <span class="en">XDOG Media</span>
+                        <span class="zh hidden">XDOG媒体</span>
+                    </h2>
+                    <p class="text-gray-400 max-w-2xl mx-auto">
+                        <span class="en">Check out the latest memes, videos, and artwork from the XDOG community</span>
+                        <span class="zh hidden">查看XDOG社区最新的meme、视频和艺术作品</span>
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- cowboyXDOG -->
+                    <div class="group relative overflow-hidden rounded-xl aspect-square bg-dark-light border border-primary/20 hover:border-primary/50 transition-all transform hover:-translate-y-1">
+                        <div class="absolute inset-0">
+                            <img src="images/cowboyXDOG.jpg" alt="cowboyXDOG" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        </div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                            <button class="w-full py-2 bg-primary/90 hover:bg-primary rounded-lg transition-colors">
+                                <span class="en">View Image</span>
+                                <span class="zh hidden">查看图片</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- racerXDOG -->
+                    <div class="group relative overflow-hidden rounded-xl aspect-square bg-dark-light border border-primary/20 hover:border-primary/50 transition-all transform hover:-translate-y-1">
+                        <div class="absolute inset-0">
+                            <img src="images/racerXDOG.jpg" alt="racerXDOG" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        </div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                            <button class="w-full py-2 bg-primary/90 hover:bg-primary rounded-lg transition-colors">
+                                <span class="en">View Image</span>
+                                <span class="zh hidden">查看图片</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- racerXDOG视频 -->
+                    <div class="group relative overflow-hidden rounded-xl aspect-square bg-dark-light border border-primary/20 hover:border-primary/50 transition-all transform hover:-translate-y-1">
+                        <div class="absolute inset-0">
+                            <video poster="images/racerXDOG.jpg" controls autoplay muted loop class="w-full h-full object-cover">
+                                <source src="images/racerXDOG.mp4" type="video/mp4">
+                                您的浏览器不支持视频播放。
+                            </video>
+                        </div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                            <button class="w-full py-2 bg-primary/90 hover:bg-primary rounded-lg transition-colors">
+                                <span class="en">Watch Video</span>
+                                <span class="zh hidden">观看视频</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- XDOGwaitingRocket -->
+                    <div class="group relative overflow-hidden rounded-xl aspect-square bg-dark-light border border-primary/20 hover:border-primary/50 transition-all transform hover:-translate-y-1">
+                        <div class="absolute inset-0">
+                            <img src="images/XDOGwaitingRocket.jpg" alt="XDOGwaitingRocket" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        </div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                            <button class="w-full py-2 bg-primary/90 hover:bg-primary rounded-lg transition-colors">
+                                <span class="en">View Image</span>
+                                <span class="zh hidden">查看图片</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- XDOGlandMoon -->
+                    <div class="group relative overflow-hidden rounded-xl aspect-square bg-dark-light border border-primary/20 hover:border-primary/50 transition-all transform hover:-translate-y-1">
+                        <div class="absolute inset-0">
+                            <img src="images/XDOGlandMoon.jpg" alt="XDOGlandMoon" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        </div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                            <button class="w-full py-2 bg-primary/90 hover:bg-primary rounded-lg transition-colors">
+                                <span class="en">View Image</span>
+                                <span class="zh hidden">查看图片</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- 社区画廊 -->
+                    <div class="group relative overflow-hidden rounded-xl aspect-square border border-primary/20 hover:border-primary/50 transition-all transform hover:-translate-y-1">
+                        <div id="galleryCover" class="absolute inset-0 bg-dark-light">
+                            <img src="" alt="XDOG Gallery Cover" class="w-full h-full object-cover opacity-80">
+                        </div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                            <button id="openGalleryBtn" class="w-full py-2 bg-primary/90 hover:bg-primary rounded-lg transition-colors">
+                                <span class="en">View Gallery</span>
+                                <span class="zh hidden">查看画廊</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-12">
+                    <button class="px-8 py-3 bg-transparent border border-primary text-primary hover:bg-primary/10 rounded-full font-medium transition-all">
+                        <span class="en">Load More Media</span>
+                        <span class="zh hidden">加载更多媒体</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 加入社区 -->
+        <section class="py-20 bg-gradient-to-r from-primary/20 to-secondary/20 relative overflow-hidden">
+            <div id="targetDiv" class="absolute inset-0 bg-grid opacity-30"></div>
+            
+            <!-- 装饰元素 -->
+            <div class="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl -mr-48 -mt-48"></div>
+            <div class="absolute bottom-0 left-0 w-96 h-96 bg-secondary/10 rounded-full blur-3xl -ml-48 -mb-48"></div>
+            
+            <div class="container mx-auto px-4 relative z-10">
+                <div class="max-w-3xl mx-auto text-center">
+                    <h2 class="font-display font-bold text-3xl md:text-5xl mb-6">
+                        <span class="en">Join the XDOG Revolution</span>
+                        <span class="zh hidden">加入XDOG革命</span>
+                    </h2>
+                    
+                    <p class="text-xl text-gray-300 mb-10">
+                        <span class="en">Become part of our growing community and stay updated with the latest XDOG news and memes</span>
+                        <span class="zh hidden">成为我们不断成长的社区的一员，随时了解最新的XDOG新闻和meme</span>
+                    </p>
+                    
+                    <div class="flex justify-center mb-12">
+                            <a href="https://x.com/xdog_meme?s=09" class="flex items-center justify-center gap-3 px-6 py-3 bg-[#1DA1F2]/10 hover:bg-[#1DA1F2]/20 text-[#1DA1F2] rounded-full transition-colors">
+                                <i class="fa fa-twitter text-xl"></i>
+                                <span class="en">Follow on Twitter</span>
+                                <span class="zh hidden">关注Twitter</span>
+                            </a>
+                        </div>
+                    
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark-light py-12 border-t border-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <div id="footerLogoDiv" class="flex items-center space-x-2 mb-6 cursor-pointer hover:text-secondary transition-colors">
+                        <div class="w-10 h-10 rounded-full overflow-hidden">
+                            <img src="images/XDOGlogo.jpg" alt="XDOG Logo" class="w-full h-full object-contain">
+                        </div>
+                        <span id="footerXdogSpan" class="font-display font-bold text-xl cursor-pointer hover:text-secondary transition-colors">XDOG</span>
+                    </div>
+                    
+                    <p class="text-gray-400 mb-6">
+                        <span class="en">The ultimate meme coin revolutionizing the crypto space with fun and community.</span>
+                        <span class="zh hidden">终极meme币，通过乐趣和社区革新加密货币领域。</span>
+                    </p>
+                    
+                    <div class="flex space-x-4">
+                        <a href="https://x.com/xdog_meme?s=09" class="w-10 h-10 rounded-full bg-dark flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary/20 transition-colors">
+                            <i class="fa fa-twitter"></i>
+                        </a>
+
+                        <a href="t.me/okbokbokx" class="w-10 h-10 rounded-full bg-dark flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary/20 transition-colors">
+                            <i class="fa fa-telegram"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-display font-semibold text-lg mb-6">
+                        <span class="en">Quick Links</span>
+                        <span class="zh hidden">快速链接</span>
+                    </h4>
+                    
+                    <ul class="space-y-3">
+                        <li><a href="#about" class="text-gray-400 hover:text-secondary transition-colors">
+                            <span class="en">About</span>
+                            <span class="zh hidden">关于</span>
+                        </a></li>
+                        <li><a href="#okx" class="text-gray-400 hover:text-secondary transition-colors">
+                            <span class="en">OKX Guide</span>
+                            <span class="zh hidden">OKX指南</span>
+                        </a></li>
+                        <li><a href="#dex" class="text-gray-400 hover:text-secondary transition-colors">
+                            <span class="en">Web3 OKX BRIDGE Guide</span>
+                            <span class="zh hidden">Web3欧意交易所跨链桥使用指南</span>
+                        </a></li>
+                        <li><a href="#media" class="text-gray-400 hover:text-secondary transition-colors">
+                            <span class="en">Media</span>
+                            <span class="zh hidden">媒体</span>
+                        </a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-display font-semibold text-lg mb-6">
+                        <span class="en">Resources</span>
+                        <span class="zh hidden">资源</span>
+                    </h4>
+                    
+                    <ul class="space-y-3">
+                        <li><a href="docs/XDOG_WHITE_PAPER_V1.0.pdf" class="text-gray-400 hover:text-secondary transition-colors" target="_blank">
+                            <span class="en">Whitepaper</span>
+                            <span class="zh hidden">白皮书</span>
+                        </a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-secondary transition-colors">
+                            <span class="en">Roadmap</span>
+                            <span class="zh hidden">路线图</span>
+                        </a></li>
+                        <li><a href="#" id="developerLink" class="text-gray-400 hover:text-secondary transition-colors">
+                            <span id="developerToggle" class="en">Developer</span>
+                            <span id="developerToggleZh" class="zh hidden">开发者名单</span>
+                        </a></li>
+                        <li><a href="#targetDiv" class="text-gray-400 hover:text-secondary transition-colors">
+                            <span id="communitySpan" class="en">Community</span>
+                            <span id="communitySpanZh" class="zh hidden">社区</span>
+                        </a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-display font-semibold text-lg mb-6">
+                        <span class="en">Legal</span>
+                        <span class="zh hidden">法律</span>
+                    </h4>
+                    
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-secondary transition-colors">
+                            <span class="en">Terms of Service</span>
+                            <span class="zh hidden">服务条款</span>
+                        </a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-secondary transition-colors">
+                            <span class="en">Privacy Policy</span>
+                            <span class="zh hidden">隐私政策</span>
+                        </a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-secondary transition-colors">
+                            <span id="disclaimerToggle" class="en">Disclaimer</span>
+                            <span id="disclaimerToggleZh" class="zh hidden">免责声明</span>
+                        </a></li>
+                    </ul>
+                </div>
+                
+                <!-- 免责声明弹窗 -->
+                <div id="disclaimerPopup" class="hidden fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-dark-light p-4 rounded-lg shadow-lg z-50 max-w-sm border border-gray-700">
+                    <span class="en block text-sm text-gray-300">
+                        XDOG is a meme coin created for entertainment purposes only. This is not financial advice. Always do your own research before investing. The value of cryptocurrency can fluctuate dramatically.
+                    </span>
+                    <span class="zh hidden block text-sm text-gray-300">
+                        XDOG是一种仅用于娱乐目的的meme币。这不是财务建议。投资前请务必进行自己的研究。加密货币的价值可能会大幅波动。
+                    </span>
+                </div>
+                
+                <!-- 开发者名单弹窗 -->
+                <div id="developerPopup" class="hidden fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-dark-light p-4 rounded-lg shadow-lg z-50 max-w-sm border border-gray-700">
+                    <h4 class="font-display font-semibold text-lg mb-3">
+                        <span class="en">Developer List</span>
+                        <span class="zh hidden">开发者名单</span>
+                    </h4>
+                    <ul class="space-y-2">
+                        <li class="text-gray-300">XTOBY</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 text-sm mb-4 md:mb-0">
+                    <span class="en">© 2025 XDOG. All rights reserved.</span>
+                    <span class="zh hidden">© 2025 XDOG. 保留所有权利。</span>
+                </p>
+                
+                <p class="text-gray-500 text-sm">
+                    <span class="en">XDOG is a meme coin for entertainment purposes only. Invest responsibly.</span>
+                    <span class="zh hidden">XDOG是一种仅用于娱乐目的的meme币。请谨慎投资。</span>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 脚本 -->
+    <script>
+        // 导航栏滚动效果
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-dark/90', 'backdrop-blur-md', 'shadow-lg');
+            } else {
+                navbar.classList.remove('bg-dark/90', 'backdrop-blur-md', 'shadow-lg');
+            }
+        });
+        
+        // 移动端菜单切换
+        const menuToggle = document.getElementById('menuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            menuToggle.innerHTML = mobileMenu.classList.contains('hidden') 
+                ? '<i class="fa fa-bars"></i>' 
+                : '<i class="fa fa-times"></i>';
+        });
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                // 关闭移动菜单（如果打开）
+        
+        // Logo点击跳转到About section
+        const logoDiv = document.getElementById('logoDiv');
+        const footerLogoDiv = document.getElementById('footerLogoDiv');
+        
+        function scrollToAbout() {
+            const aboutSection = document.getElementById('about');
+            if (aboutSection) {
+                aboutSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+        
+        if (logoDiv) {
+            logoDiv.addEventListener('click', scrollToAbout);
+        }
+        
+        if (footerLogoDiv) {
+            footerLogoDiv.addEventListener('click', scrollToAbout);
+        }
+        
+        // 为三个XDOG span元素添加点击跳转功能
+        const navbarXdogSpan = document.getElementById('navbarXdogSpan');
+        const footerXdogSpan = document.getElementById('footerXdogSpan');
+        const aboutXdogSpan = document.getElementById('aboutXdogSpan');
+        const aboutXdogSpanZh = document.getElementById('aboutXdogSpanZh');
+        
+        function handleXdogSpanClick(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            scrollToAbout();
+        }
+        
+        if (navbarXdogSpan) {
+            navbarXdogSpan.addEventListener('click', handleXdogSpanClick);
+        }
+        
+        if (footerXdogSpan) {
+            footerXdogSpan.addEventListener('click', handleXdogSpanClick);
+        }
+        
+        if (aboutXdogSpan) {
+            aboutXdogSpan.addEventListener('click', handleXdogSpanClick);
+        }
+        
+        if (aboutXdogSpanZh) {
+            aboutXdogSpanZh.addEventListener('click', handleXdogSpanClick);
+        }
+        
+        // 开发者名单弹窗功能
+        const developerLink = document.getElementById('developerLink');
+        const developerPopup = document.getElementById('developerPopup');
+        
+        developerLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            // 显示开发者名单弹窗
+            developerPopup.classList.remove('hidden');
+            
+            // 隐藏其他弹窗
+            document.getElementById('disclaimerPopup').classList.add('hidden');
+        });
+        
+        // 点击其他地方关闭弹窗
+        document.addEventListener('click', function(e) {
+            if (!developerLink.contains(e.target) && !developerPopup.contains(e.target)) {
+                developerPopup.classList.add('hidden');
+            }
+        });
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                    menuToggle.innerHTML = '<i class="fa fa-bars"></i>';
+                }
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // 步骤按钮切换
+        const stepBtns = document.querySelectorAll('.step-btn');
+        stepBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                stepBtns.forEach(b => {
+                    b.classList.remove('active', 'bg-primary', 'text-white');
+                    b.classList.add('bg-dark', 'border', 'border-gray-700', 'hover:border-primary/50');
+                });
+                
+                btn.classList.add('active', 'bg-primary', 'text-white');
+                btn.classList.remove('bg-dark', 'border', 'border-gray-700', 'hover:border-primary/50');
+                
+                // 这里可以添加步骤内容切换逻辑
+            });
+        });
+        
+        // 复制哈希地址
+        function copyHash() {
+            const hash = '0x0cc24c51BF89c00c5afFBfCf5E856C25ecBdb48e';
+            navigator.clipboard.writeText(hash).then(() => {
+                // 显示复制成功提示
+                const notification = document.createElement('div');
+                notification.className = 'fixed bottom-4 right-4 bg-primary text-white px-4 py-2 rounded-lg shadow-lg z-50';
+                notification.textContent = 'Hash copied to clipboard!';
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    notification.style.opacity = '0';
+                    notification.style.transition = 'opacity 0.3s';
+                    setTimeout(() => {
+                        document.body.removeChild(notification);
+                    }, 300);
+                }, 2000);
+            });
+        }
+        
+        // 优化的视频加载控制
+        document.addEventListener('DOMContentLoaded', function() {
+            const loadingScreen = document.getElementById('loadingScreen');
+            const loadingVideo = document.getElementById('loadingVideo');
+            const fallbackLoader = document.getElementById('fallbackLoader');
+            
+            let videoLoaded = false;
+            let loadingTimeout;
+            let checkInterval;
+            
+            // 立即开始尝试加载视频
+            loadingVideo.load();
+            
+            // 视频加载成功事件
+            loadingVideo.addEventListener('canplaythrough', function() {
+                videoLoaded = true;
+                console.log('视频加载成功，可以流畅播放');
+                startMonitoring();
+            });
+            
+            // 视频加载错误事件
+            loadingVideo.addEventListener('error', function(e) {
+                console.error('视频加载失败:', e);
+                showFallbackLoader();
+            });
+            
+            // 视频暂停事件（可能是因为缓冲）
+            loadingVideo.addEventListener('pause', function() {
+                if (!videoLoaded && !fallbackLoader.classList.contains('hidden')) {
+                    console.log('视频暂停，可能正在缓冲');
+                    // 尝试重新播放
+                    setTimeout(() => {
+                        if (loadingVideo.paused && videoLoaded) {
+                            loadingVideo.play().catch(err => {
+                                console.error('无法恢复播放:', err);
+                                showFallbackLoader();
+                            });
+                        }
+                    }, 1000);
+                }
+            });
+            
+            // 显示备用加载动画
+            function showFallbackLoader() {
+                loadingVideo.style.display = 'none';
+                fallbackLoader.classList.remove('hidden');
+                // 备用加载也设置超时
+                setTimeout(hideLoading, 8000);
+            }
+            
+            // 监控视频播放进度
+            function startMonitoring() {
+                // 定期检查视频播放进度
+                checkInterval = setInterval(() => {
+                    if (loadingVideo.duration > 0 && (loadingVideo.duration - loadingVideo.currentTime) < 0.5) {
+                        clearInterval(checkInterval);
+                        hideLoading();
+                    }
+                }, 100); // 每100毫秒检查一次
+            }
+            
+            // 设置加载超时
+            loadingTimeout = setTimeout(() => {
+                if (!videoLoaded) {
+                    console.warn('视频加载超时，显示备用加载动画');
+                    showFallbackLoader();
+                }
+            }, 3000);
+            
+            // 隐藏加载界面
+            function hideLoading() {
+                clearTimeout(loadingTimeout);
+                if (checkInterval) clearInterval(checkInterval);
+                
+                loadingScreen.style.opacity = '0';
+                loadingScreen.style.transition = 'opacity 0.5s ease-out';
+                setTimeout(() => {
+                    loadingScreen.style.display = 'none';
+                }, 500);
+            }
+        });
+        
+        // 语言切换功能
+        const langToggle = document.getElementById('langToggle');
+        const mobileLangToggle = document.getElementById('mobileLangToggle');
+        const enElements = document.querySelectorAll('.en');
+        const zhElements = document.querySelectorAll('.zh');
+        
+        function toggleLanguage() {
+            enElements.forEach(el => el.classList.toggle('hidden'));
+            zhElements.forEach(el => el.classList.toggle('hidden'));
+        }
+        
+        langToggle.addEventListener('click', toggleLanguage);
+        mobileLangToggle.addEventListener('click', toggleLanguage);
+        
+        // 为社区span元素添加点击事件，跳转到背景网格div
+        const communitySpan = document.getElementById('communitySpan');
+        const communitySpanZh = document.getElementById('communitySpanZh');
+        const targetDiv = document.getElementById('targetDiv');
+        
+        communitySpan.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            targetDiv.scrollIntoView({ behavior: 'smooth' });
+        });
+        
+        communitySpanZh.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            targetDiv.scrollIntoView({ behavior: 'smooth' });
+        });
+        
+        // 免责声明弹窗功能
+        const disclaimerToggle = document.getElementById('disclaimerToggle');
+        const disclaimerToggleZh = document.getElementById('disclaimerToggleZh');
+        const disclaimerPopup = document.getElementById('disclaimerPopup');
+        
+        // 点击显示弹窗
+        function showDisclaimerPopup(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            disclaimerPopup.classList.remove('hidden');
+        }
+        
+        // 鼠标移动关闭弹窗
+        function hideDisclaimerPopup() {
+            disclaimerPopup.classList.add('hidden');
+        }
+        
+        // 添加事件监听
+        disclaimerToggle.addEventListener('click', showDisclaimerPopup);
+        disclaimerToggleZh.addEventListener('click', showDisclaimerPopup);
+        
+        // 鼠标移动到其他地方关闭弹窗
+        document.addEventListener('mousemove', function(e) {
+            // 如果鼠标不在免责声明切换按钮和弹窗上，关闭弹窗
+            if (!disclaimerToggle.contains(e.target) && 
+                !disclaimerToggleZh.contains(e.target) && 
+                !disclaimerPopup.contains(e.target)) {
+                hideDisclaimerPopup();
+            }
+        });
+    </script>
+    
+    <!-- 画廊模态框 -->
+    <div id="galleryModal" class="fixed inset-0 bg-black/90 z-50 flex items-center justify-center hidden">
+        <div class="absolute top-4 right-4 z-10">
+            <button id="closeGalleryBtn" class="text-white text-4xl hover:text-primary transition-colors">
+                &times;
+            </button>
+        </div>
+        
+        <div class="container max-w-6xl mx-auto px-4 py-8">
+            <h3 class="text-2xl font-bold mb-6 text-center">
+                <span class="en">XDOG Community Gallery</span>
+                <span class="zh hidden">XDOG社区画廊</span>
+            </h3>
+            
+            <div id="galleryContainer" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7 gap-4 max-h-[70vh] overflow-y-auto pb-4">
+                <!-- 画廊图片将通过JavaScript动态加载 -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- 图片查看器模态框 -->
+    <div id="imageViewerModal" class="fixed inset-0 bg-black/95 z-50 flex items-center justify-center hidden">
+        <div class="absolute top-4 right-4 z-10">
+            <button id="closeImageViewerBtn" class="text-white text-4xl hover:text-primary transition-colors">
+                &times;
+            </button>
+        </div>
+        
+        <div class="max-w-5xl mx-auto px-4">
+            <img id="viewedImage" src="" alt="XDOG Gallery Image" class="max-w-full max-h-[80vh] object-contain">
+        </div>
+    </div>
+    
+    <script>
+        // 画廊图片数组
+        const galleryImages = [
+            '04f27da96d28c8ec482e6f56f0b49a67.jpg',
+            '139d3205fd9e7b4a509b50a0c31c0fa2.jpg',
+            '247421db40f0fc19e0617cccb2bf41be.jpg',
+            '25fb45bb5fc329b69be8cbab4ae506c5.jpg',
+            '3067a51c569905fc1785d05ef758fbbc.jpg',
+            '468f8c8c326fb3756c64c74c08ec2d70.jpg',
+            '53ed796c13bb58e7246c21e8ce988bf3.jpg',
+            '5b685e32b1c8c2c3e559e8a8b7579645.jpg',
+            '7f1a0d18534c940e1ef6feee3bbc3671.jpg',
+            '7ff0638c56573ca799b4f39820eadc7c.jpg',
+            '831115cb7cd2dd68772a98db0b0f1e56.jpg',
+            '88565759c139bb54478b00136180dcdf.jpg',
+            '8bec567a347903cc96f251a55abe5c38.jpg',
+            '8c63ccac78e3005cca4df1808fa2bd3a.jpg',
+            '919e0ea0517abeddfcb02f19512bff0d.jpg',
+            '9428015365fee049810eb14a562a073c.jpg',
+            '973ae56093f26af704ffeef6f50a842c.jpg',
+            'a7b829de36b0695d4d14859979d058a3.jpg',
+            'ad1b5ee0962c5bb9aa77c4339ba76f5f.jpg',
+            'c18ce634beada6b0c26e178b2c678f57.jpg',
+            'd3629acb23736c85f787d1602df68fd5.jpg',
+            'e6b955da9f21c74b438f479395030780.jpg',
+            'e90d29878aa3b7a9576513fcda6a5e38.jpg',
+            'ecc95d1958ebd46d2ab27d301dfd2eeb.jpg',
+            'eeaf328a62ccf76ca09809e55587a936.jpg',
+            'efb48d9ba58fd30d7db40e92571d0b97.jpg',
+            'f394c88c33f22b857736507c873c75d8.jpg',
+            'f4c1172b10b701a1cc31db8c9c260432.jpg'
+        ];
+        
+        // 获取DOM元素
+        const galleryModal = document.getElementById('galleryModal');
+        const imageViewerModal = document.getElementById('imageViewerModal');
+        const galleryContainer = document.getElementById('galleryContainer');
+        const viewedImage = document.getElementById('viewedImage');
+        const galleryCover = document.getElementById('galleryCover');
+        const openGalleryBtn = document.getElementById('openGalleryBtn');
+        const closeGalleryBtn = document.getElementById('closeGalleryBtn');
+        const closeImageViewerBtn = document.getElementById('closeImageViewerBtn');
+        
+        // 设置画廊封面为随机图片
+        function setGalleryCover() {
+            if (galleryImages.length > 0) {
+                const randomIndex = Math.floor(Math.random() * galleryImages.length);
+                const coverImage = galleryCover.querySelector('img');
+                coverImage.src = `galary/${galleryImages[randomIndex]}`;
+            }
+        }
+        
+        // 页面加载时设置画廊封面
+        setGalleryCover();
+        
+        // 加载画廊图片
+        function loadGallery() {
+            galleryContainer.innerHTML = '';
+            
+            galleryImages.forEach((image, index) => {
+                const imgElement = document.createElement('div');
+                imgElement.className = 'aspect-square bg-dark-light rounded-lg overflow-hidden cursor-pointer transition-transform hover:scale-105 hover:shadow-lg hover:shadow-primary/20';
+                imgElement.innerHTML = `
+                    <img 
+                        src="galary/${image}" 
+                        alt="XDOG Gallery Image ${index + 1}" 
+                        class="w-full h-full object-cover"
+                        loading="lazy"
+                    >
+                `;
+                
+                imgElement.addEventListener('click', () => {
+                    viewedImage.src = `galary/${image}`;
+                    viewedImage.alt = `XDOG Gallery Image ${index + 1}`;
+                    imageViewerModal.classList.remove('hidden');
+                    document.body.style.overflow = 'hidden';
+                });
+                
+                galleryContainer.appendChild(imgElement);
+            });
+        }
+        
+        // 打开画廊模态框
+        openGalleryBtn.addEventListener('click', () => {
+            loadGallery();
+            galleryModal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        });
+        
+        // 关闭画廊模态框
+        closeGalleryBtn.addEventListener('click', () => {
+            galleryModal.classList.add('hidden');
+            document.body.style.overflow = '';
+        });
+        
+        // 关闭图片查看器模态框
+        closeImageViewerBtn.addEventListener('click', () => {
+            imageViewerModal.classList.add('hidden');
+            document.body.style.overflow = '';
+        });
+        
+        // 点击模态框背景关闭模态框
+        galleryModal.addEventListener('click', (e) => {
+            if (e.target === galleryModal) {
+                galleryModal.classList.add('hidden');
+                document.body.style.overflow = '';
+            }
+        });
+        
+        imageViewerModal.addEventListener('click', (e) => {
+            if (e.target === imageViewerModal) {
+                imageViewerModal.classList.add('hidden');
+                document.body.style.overflow = '';
+            }
+        });
+        
+        // 按ESC键关闭模态框
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                galleryModal.classList.add('hidden');
+                imageViewerModal.classList.add('hidden');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // OKX操作指南画廊功能
+        // 定义画廊图片数据
+        const okxGalleryImages = [
+            {
+                src: 'OKXuse/step1.jpg',
+                alt: 'OKX Registration Screen',
+                titleEn: 'OKX Registration Screen',
+                titleZh: 'OKX注册界面'
+            },
+            {
+                src: 'OKXuse/step2.jpg',
+                alt: 'Identity Verification',
+                titleEn: 'Identity Verification',
+                titleZh: '身份验证'
+            },
+            {
+                src: 'OKXuse/step3.jpg',
+                alt: 'Deposit Funds',
+                titleEn: 'Deposit Funds',
+                titleZh: '存入资金'
+            },
+            {
+                src: 'OKXuse/step4.jpg',
+                alt: 'Buy XDOG',
+                titleEn: 'Buy XDOG',
+                titleZh: '购买XDOG'
+            }
+        ];
+
+        // 获取DOM元素
+        const galleryImage = document.getElementById('galleryImage');
+        // 为画廊图片添加点击放大功能
+        galleryImage.addEventListener('click', () => {
+            viewedImage.src = galleryImage.src;
+            viewedImage.alt = galleryImage.alt;
+            imageViewerModal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        });
+        
+        // 打开图片查看器函数
+        function openImageViewer(imageSrc, imageAlt) {
+            viewedImage.src = imageSrc;
+            viewedImage.alt = imageAlt;
+            imageViewerModal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+        const galleryCaption = document.getElementById('galleryCaption');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        let currentIndex = 0;
+
+        // 更新画廊图片
+        function updateGalleryImage(index) {
+            const image = okxGalleryImages[index];
+            galleryImage.src = image.src;
+            galleryImage.alt = image.alt;
+            
+            // 更新标题
+            const titleEn = galleryCaption.querySelector('.en');
+            const titleZh = galleryCaption.querySelector('.zh');
+            titleEn.textContent = image.titleEn;
+            titleZh.textContent = image.titleZh;
+            
+            // 更新按钮状态
+            updateButtonStates(index);
+        }
+
+        // 更新按钮状态
+        function updateButtonStates(index) {
+            // 第一张图片时，上一张按钮禁用
+            if (index === 0) {
+                prevBtn.classList.add('text-gray-400', 'cursor-not-allowed');
+                prevBtn.classList.remove('hover:bg-primary/80');
+                prevBtn.disabled = true;
+            } else {
+                prevBtn.classList.remove('text-gray-400', 'cursor-not-allowed');
+                prevBtn.classList.add('hover:bg-primary/80');
+                prevBtn.disabled = false;
+            }
+            
+            // 最后一张图片时，下一张按钮禁用
+            if (index === okxGalleryImages.length - 1) {
+                nextBtn.classList.add('text-gray-400', 'cursor-not-allowed');
+                nextBtn.classList.remove('hover:bg-primary/80');
+                nextBtn.disabled = true;
+            } else {
+                nextBtn.classList.remove('text-gray-400', 'cursor-not-allowed');
+                nextBtn.classList.add('hover:bg-primary/80');
+                nextBtn.disabled = false;
+            }
+        }
+
+        // 下一张图片
+        function nextImage() {
+            if (currentIndex < okxGalleryImages.length - 1) {
+                currentIndex++;
+                updateGalleryImage(currentIndex);
+            }
+        }
+
+        // 上一张图片
+        function prevImage() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateGalleryImage(currentIndex);
+            }
+        }
+
+        // 添加按钮点击事件
+        prevBtn.addEventListener('click', prevImage);
+        nextBtn.addEventListener('click', nextImage);
+
+        // 初始化画廊
+        updateGalleryImage(currentIndex);
+    </script>
+
+</body></html>
