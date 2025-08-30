@@ -357,14 +357,14 @@
                 
                 <div class="grid md:grid-cols-2 gap-12">
                     <!-- 左侧：步骤说明 -->
-                    <div>
+                    <div class="p-2 sm:p-4">
                         <div class="space-y-8">
                             <div class="bg-dark rounded-xl overflow-hidden border border-primary/20 hover:border-primary/50 transition-colors cursor-pointer" onclick="openImageViewer('OKXbridge/ETH2XDOG.jpg', 'ETH to XDOG Bridge')">
-                                    <img src="OKXbridge/ETH2XDOG.jpg" alt="ETH to XDOG Bridge" class="w-full h-auto object-cover hover:scale-[1.02] transition-transform duration-300">
+                                    <img src="OKXbridge/ETH2XDOG.jpg" alt="ETH to XDOG Bridge" class="w-full max-w-[100vw] h-auto object-cover hover:scale-[1.02] transition-transform duration-300">
                                 </div>
                                 
                                 <div class="bg-dark rounded-xl overflow-hidden border border-primary/20 hover:border-primary/50 transition-colors cursor-pointer" onclick="openImageViewer('OKXbridge/USDConSOL2XDOG.jpg', 'USDC on Solana to XDOG Bridge')">
-                                    <img src="OKXbridge/USDConSOL2XDOG.jpg" alt="USDC on Solana to XDOG Bridge" class="w-full h-auto object-cover hover:scale-[1.02] transition-transform duration-300">
+                                    <img src="OKXbridge/USDConSOL2XDOG.jpg" alt="USDC on Solana to XDOG Bridge" class="w-full max-w-[100vw] h-auto object-cover hover:scale-[1.02] transition-transform duration-300">
                                 </div>
                         </div>
                     </div>
@@ -373,12 +373,12 @@
                     <div>
                         <!-- 多层桥支持图片 -->
                         <div class="bg-dark rounded-xl overflow-hidden border border-primary/20 hover:border-primary/50 transition-colors cursor-pointer mb-8" onclick="openImageViewer('OKXbridge/multi_layers_bridge_support.jpg', 'Multi-Layers Bridge Support')">
-                            <img src="OKXbridge/multi_layers_bridge_support.jpg" alt="Multi-Layers Bridge Support" class="w-full h-auto object-cover hover:scale-[1.02] transition-transform duration-300">
+                            <img src="OKXbridge/multi_layers_bridge_support.jpg" alt="Multi-Layers Bridge Support" class="w-full max-w-[100vw] h-auto object-cover hover:scale-[1.02] transition-transform duration-300">
                         </div>
                         
                         <!-- 预留DEX界面图片 -->
                         <div class="rounded-xl overflow-hidden bg-dark border border-primary/30 mb-8 aspect-video">
-                            <div class="w-full h-full flex items-center justify-center">
+                            <div class="w-full max-w-[100vw] h-full flex items-center justify-center">
                                 <a href="https://web3.okx.com/zh-hans/dex-swap/bridge?chain=solana,x-layer&token=11111111111111111111111111111111,0x0cc24c51bf89c00c5affbfcf5e856c25ecbdb48e" class="bg-primary hover:bg-primary/90 text-dark font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105" target="_blank">
                                     <span class="en">CLICK HERE TO OKX BRIDGE</span>
                                     <span class="zh hidden">点击此处访问OKX跨链桥</span>
@@ -387,7 +387,7 @@
                         </div>
                         
                         <!-- 合约地址卡片 -->
-                        <div class="bg-dark p-6 rounded-xl border border-primary/30">
+                        <div class="max-w-[100vw] bg-dark p-6 rounded-xl border border-primary/30">
                             <h3 class="font-display font-semibold text-xl mb-4">
                                 <span class="en">XDOG Contract Address</span>
                                 <span class="zh hidden">XDOG合约地址</span>
@@ -856,7 +856,7 @@
             loadingVideo.load();
             
             // 视频加载成功事件
-            loadingVideo.addEventListener('canplaythrough', function() {
+            loadingVideo.addEventListener('loadeddata', function() {
                 videoLoaded = true;
                 console.log('视频加载成功，可以流畅播放');
                 startMonitoring();
