@@ -215,9 +215,13 @@
                             </div>
                         </div>
                         
+                        <div id="uploadLimitInfo" class="mt-4 text-sm text-gray-400 text-center">
+                            <span class="en">First upload today is free</span>
+                            <span class="zh hidden">今日首次上传免费</span>
+                        </div>
                         <button id="submitMemeBtn" class="mt-6 w-full py-3 bg-secondary text-dark font-medium rounded-lg hover:bg-secondary/80 transition-colors disabled:opacity-50 disabled:cursor-not-allowed" disabled>
-                            <span class="en">Pay 1 XDOG to Submit Meme</span>
-                            <span class="zh hidden">支付1枚XDOG以提交表情包</span>
+                            <span class="en">Submit Meme (Free)</span>
+                            <span class="zh hidden">提交表情包（免费）</span>
                         </button>
                     </div>
                 </div>
@@ -560,6 +564,23 @@
         <ul class="space-y-2">
             <li class="text-gray-300">XTOBY</li>
         </ul>
+    </div>
+
+    <!-- 图片查看器模态框 -->
+    <div id="imageViewerModal" class="fixed inset-0 bg-black/90 flex items-center justify-center z-50 hidden">
+        <div class="relative max-w-4xl w-full max-h-[90vh] flex flex-col items-center">
+            <button id="closeImageViewerBtn" class="absolute top-4 right-4 text-white hover:text-secondary transition-colors z-10 bg-dark/50 rounded-full p-2">
+                <i class="fa fa-times text-xl"></i>
+            </button>
+            <div class="bg-dark p-4 rounded-lg border border-primary/30 max-w-full max-h-[80vh] flex items-center justify-center">
+                <img id="viewerImage" src="" alt="Meme" class="max-w-full max-h-[70vh] object-contain">
+            </div>
+            <button id="downloadImageBtn" class="mt-4 px-4 py-2 bg-secondary text-dark font-medium rounded-lg hover:bg-secondary/80 transition-colors">
+                <i class="fa fa-download mr-2"></i>
+                <span class="en">Download</span>
+                <span class="zh hidden">下载</span>
+            </button>
+        </div>
     </div>
 
     <!-- 脚本 -->
