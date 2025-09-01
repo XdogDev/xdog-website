@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>XDOG MEME CREATION</title>
+    <link rel="icon" type="image/jpeg" href="images/XDOGlogo.jpg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#6C5CE7',
+                        secondary: '#00F5D4',
+                        dark: '#121212',
+                        'dark-light': '#1E1E1E',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        display: ['Poppins', 'system-ui', 'sans-serif'],
+                    },
+                },
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .bg-grid {
+                background-image: radial-gradient(rgba(108, 92, 231, 0.1) 1px, transparent 1px);
+                background-size: 20px 20px;
+            }
+            .text-shadow {
+                text-shadow: 0 0 10px rgba(108, 92, 231, 0.5);
+            }
+        }
+    </style>
+</head>
+<body class="bg-dark text-white min-h-screen">
+    <!-- 导航栏 -->
+    <header id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-300">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div id="logoDiv" class="flex items-center space-x-2 cursor-pointer hover:text-secondary transition-colors">
+                <div class="w-10 h-10 rounded-full overflow-hidden">
+                    <img src="images/XDOGlogo.jpg" alt="XDOG Logo" class="w-full h-full object-contain">
+                </div>
+                <span id="xdogSpan" class="font-display font-bold text-xl cursor-pointer hover:text-secondary transition-colors">XDOG</span>
+            </div>
+            
+            <!-- 桌面导航 -->
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="index.html#about" class="nav-link hover:text-secondary transition-colors">
+                    <span class="en">About</span>
+                    <span class="zh hidden">关于</span>
+                </a>
+                <a href="index.html#okx" class="nav-link hover:text-secondary transition-colors">
+                    <span class="en">OKX Guide</span>
+                    <span class="zh hidden">OKX指南</span>
+                </a>
+                <a href="index.html#dex" class="nav-link hover:text-secondary transition-colors">
+                    <span class="en">Web3 OKX BRIDGE Guide</span>
+                    <span class="zh hidden">Web3欧意交易所跨链桥使用指南</span>
+                </a>
+                <a href="index.html#media" class="nav-link hover:text-secondary transition-colors">
+                    <span class="en">Media</span>
+                    <span class="zh hidden">媒体</span>
+                </a>
+                <a href="meme-creation.html" class="nav-link text-secondary transition-colors">
+                    <span class="en">XDOG MEME CREATION</span>
+                    <span class="zh hidden">XDOG表情包制作</span>
+                </a>
+                <button id="langToggle" class="flex items-center space-x-1 px-3 py-1 rounded-full border border-primary/30 hover:border-secondary transition-colors">
+                    <span class="en">中文</span>
+                    <span class="zh hidden">English</span>
+                </button>
+            </nav>
+            
+            <!-- 移动端菜单按钮 -->
+            <button id="menuToggle" class="md:hidden text-2xl">
+                <i class="fa fa-bars"></i>
+            </button>
+        </div>
+        
+        <!-- 移动端导航菜单 -->
+        <div id="mobileMenu" class="md:hidden bg-dark-light absolute w-full left-0 top-full py-4 px-4 hidden">
+            <div class="flex flex-col space-y-4">
+                <a href="index.html#about" class="mobile-nav-link hover:text-secondary transition-colors py-2">
+                    <span class="en">About</span>
+                    <span class="zh hidden">关于</span>
+                </a>
+                <a href="index.html#okx" class="mobile-nav-link hover:text-secondary transition-colors py-2">
+                    <span class="en">OKX Guide</span>
+                    <span class="zh hidden">OKX指南</span>
+                </a>
+                <a href="index.html#dex" class="mobile-nav-link hover:text-secondary transition-colors py-2">
+                    <span class="en">Web3 OKX BRIDGE Guide</span>
+                    <span class="zh hidden">Web3欧意交易所跨链桥使用指南</span>
+                </a>
+                <a href="index.html#media" class="mobile-nav-link hover:text-secondary transition-colors py-2">
+                    <span class="en">Media</span>
+                    <span class="zh hidden">媒体</span>
+                </a>
+                <a href="meme-creation.html" class="mobile-nav-link text-secondary transition-colors py-2">
+                    <span class="en">XDOG MEME CREATION</span>
+                    <span class="zh hidden">XDOG表情包制作</span>
+                </a>
+                <button id="mobileLangToggle" class="flex items-center space-x-1 px-3 py-2 rounded-full border border-primary/30 hover:border-secondary transition-colors w-fit">
+                    <span class="en">中文</span>
+                    <span class="zh hidden">English</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-24 pb-16">
+        <!-- 页面标题区域 -->
+        <section class="py-12 bg-grid relative overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-b from-primary/10 to-transparent pointer-events-none"></div>
+            <div class="container mx-auto px-4 relative z-10">
+                <div class="text-center">
+                    <h1 class="font-display font-bold text-3xl md:text-5xl mb-6 text-shadow">
+                        <span class="en">XDOG MEME CREATION</span>
+                        <span class="zh hidden">XDOG表情包制作</span>
+                    </h1>
+                    <p class="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
+                        <span class="en">Create and share your XDOG memes, earn rewards, and compete in the global XDOG community</span>
+                        <span class="zh hidden">创建并分享你的XDOG表情包，赚取奖励，在全球XDOG社区中竞争</span>
+                    </p>
+                    
+                    <!-- 钱包连接按钮 -->
+                    <div id="walletConnectSection" class="flex flex-col items-center space-y-4">
+                        <button id="connectWalletBtn" class="px-8 py-3 bg-primary hover:bg-primary/80 rounded-full font-medium transition-all transform hover:scale-105">
+                            <span class="en">Connect Wallet</span>
+                            <span class="zh hidden">连接钱包</span>
+                        </button>
+                        <p id="walletAddress" class="text-gray-400 hidden">
+                            <i class="fa fa-link text-primary mr-2"></i>
+                            <span class="font-mono text-sm truncate max-w-xs"></span>
+                        </p>
+                        <div id="userStats" class="hidden flex items-center space-x-6 mt-4">
+                            <div class="flex items-center">
+                                <i class="fa fa-gift text-secondary mr-2"></i>
+                                <span class="text-sm">
+                                    <span class="en">Rewards: </span>
+                                    <span class="zh hidden">奖励: </span>
+                                    <span id="rewardBalance" class="font-semibold text-white">0</span> XDOG
+                                </span>
+                            </div>
+                            <button id="withdrawBtn" class="px-4 py-1 bg-secondary/20 text-secondary rounded-full text-sm hover:bg-secondary/30 transition-colors" disabled>
+                                <span class="en">Withdraw</span>
+                                <span class="zh hidden">提取</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Meme上传区域 -->
+        <section class="py-12 bg-dark-light">
+            <div class="container mx-auto px-4">
+                <div class="max-w-2xl mx-auto">
+                    <h2 class="font-display font-bold text-2xl md:text-3xl mb-8 text-center">
+                        <span class="en">Upload Your Meme</span>
+                        <span class="zh hidden">上传你的表情包</span>
+                    </h2>
+                    
+                    <div id="uploadSection" class="bg-dark p-6 rounded-xl border border-primary/30 hidden">
+                        <div class="mb-6">
+                            <label class="block text-gray-300 mb-2">
+                                <span class="en">Meme Image</span>
+                                <span class="zh hidden">表情包图片</span>
+                            </label>
+                            <div id="dropZone" class="border-2 border-dashed border-primary/50 rounded-lg p-8 text-center hover:border-secondary transition-colors cursor-pointer">
+                                <i class="fa fa-upload text-4xl text-primary mb-4"></i>
+                                <p class="text-gray-400 mb-2">
+                                    <span class="en">Drag & drop your image here</span>
+                                    <span class="zh hidden">拖放图片到此处</span>
+                                </p>
+                                <p class="text-xs text-gray-500">
+                                    <span class="en">or</span>
+                                    <span class="zh hidden">或者</span>
+                                </p>
+                                <button class="mt-2 px-4 py-1 bg-primary/20 text-primary rounded hover:bg-primary/30 transition-colors text-sm">
+                                    <span class="en">Browse Files</span>
+                                    <span class="zh hidden">浏览文件</span>
+                                </button>
+                                <input type="file" id="imageUpload" accept="image/*" class="hidden">
+                            </div>
+                            <p id="uploadLimitInfo" class="text-xs text-gray-500 mt-2 text-center hidden">
+                                <span class="en">You can upload 1 meme per day</span>
+                                <span class="zh hidden">你每天可以上传1个表情包</span>
+                            </p>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-gray-300 mb-2">
+                                    <span class="en">Meme Description (English)</span>
+                                    <span class="zh hidden">表情包描述（英文）</span>
+                                </label>
+                                <textarea id="memeDescriptionEn" class="w-full bg-dark-light border border-gray-700 rounded-lg p-3 text-white focus:border-secondary outline-none resize-none" rows="3" placeholder="Enter a funny description"></textarea>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-gray-300 mb-2">
+                                    <span class="en">Meme Description (Chinese)</span>
+                                    <span class="zh hidden">表情包描述（中文）</span>
+                                </label>
+                                <textarea id="memeDescriptionZh" class="w-full bg-dark-light border border-gray-700 rounded-lg p-3 text-white focus:border-secondary outline-none resize-none" rows="3" placeholder="输入有趣的中文描述"></textarea>
+                            </div>
+                        </div>
+                        
+                        <button id="submitMemeBtn" class="mt-6 w-full py-3 bg-secondary text-dark font-medium rounded-lg hover:bg-secondary/80 transition-colors disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                            <span class="en">Pay 1 XDOG to Submit Meme</span>
+                            <span class="zh hidden">支付1枚XDOG以提交表情包</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 随机Meme展示区域 -->
+        <section class="py-12 bg-dark">
+            <div class="container mx-auto px-4">
+                <!-- 今日随机Meme -->
+                <div class="mb-12">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="font-display font-bold text-2xl md:text-3xl">
+                            <span class="en">Today's Random Memes</span>
+                            <span class="zh hidden">今日随机表情包</span>
+                        </h2>
+                        <div class="flex items-center space-x-2">
+                            <span id="todayRefreshCount" class="text-sm text-gray-400">
+                                <span class="en">20/20 free</span>
+                                <span class="zh hidden">20/20 免费</span>
+                            </span>
+                            <button id="refreshTodayBtn" class="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm hover:bg-primary/30 transition-colors">
+                                <i class="fa fa-refresh mr-1"></i>
+                                <span class="en">Refresh</span>
+                                <span class="zh hidden">刷新</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div id="todayRandomMemes" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <!-- 今日随机Meme将通过JavaScript动态生成 -->
+                    </div>
+                </div>
+                
+                <!-- 历史随机Meme -->
+                <div>
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="font-display font-bold text-2xl md:text-3xl">
+                            <span class="en">All Time Random Memes</span>
+                            <span class="zh hidden">历史随机表情包</span>
+                        </h2>
+                        <div class="flex items-center space-x-2">
+                            <span id="allRefreshCount" class="text-sm text-gray-400">
+                                <span class="en">20/20 free</span>
+                                <span class="zh hidden">20/20 免费</span>
+                            </span>
+                            <button id="refreshAllBtn" class="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm hover:bg-primary/30 transition-colors">
+                                <i class="fa fa-refresh mr-1"></i>
+                                <span class="en">Refresh</span>
+                                <span class="zh hidden">刷新</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div id="allRandomMemes" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <!-- 历史随机Meme将通过JavaScript动态生成 -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 排行榜区域 -->
+        <section class="py-12 bg-dark-light">
+            <div class="container mx-auto px-4">
+                <h2 class="font-display font-bold text-2xl md:text-3xl mb-8 text-center">
+                    <span class="en">Leaderboards</span>
+                    <span class="zh hidden">排行榜</span>
+                </h2>
+                
+                <!-- 今日排行榜 -->
+                <div class="mb-12">
+                    <h3 class="font-display font-semibold text-xl md:text-2xl mb-6">
+                        <span class="en">Today's Leaderboard</span>
+                        <span class="zh hidden">今日排行榜</span>
+                    </h3>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <!-- 今日点赞榜 -->
+                        <div class="bg-dark p-6 rounded-xl border border-primary/30">
+                            <div class="flex items-center mb-4">
+                                <i class="fa fa-thumbs-up text-secondary mr-2"></i>
+                                <h4 class="font-semibold">
+                                    <span class="en">Top Liked Today</span>
+                                    <span class="zh hidden">今日点赞榜</span>
+                                </h4>
+                            </div>
+                            <div id="todayLikesContent" class="space-y-4">
+                                <!-- 今日点赞榜内容将通过JavaScript动态生成 -->
+                            </div>
+                        </div>
+                        
+                        <!-- 今日打赏榜 -->
+                        <div class="bg-dark p-6 rounded-xl border border-primary/30">
+                            <div class="flex items-center mb-4">
+                                <i class="fa fa-gift text-primary mr-2"></i>
+                                <h4 class="font-semibold">
+                                    <span class="en">Top Rewarded Today</span>
+                                    <span class="zh hidden">今日打赏榜</span>
+                                </h4>
+                            </div>
+                            <div id="todayRewardsContent" class="space-y-4">
+                                <!-- 今日打赏榜内容将通过JavaScript动态生成 -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 历史总榜 -->
+                <div>
+                    <h3 class="font-display font-semibold text-xl md:text-2xl mb-6">
+                        <span class="en">All Time Leaderboard</span>
+                        <span class="zh hidden">历史总榜</span>
+                    </h3>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <!-- 历史点赞总榜 -->
+                        <div class="bg-dark p-6 rounded-xl border border-primary/30">
+                            <div class="flex items-center mb-4">
+                                <i class="fa fa-thumbs-up text-secondary mr-2"></i>
+                                <h4 class="font-semibold">
+                                    <span class="en">Top Liked All Time</span>
+                                    <span class="zh hidden">历史点赞总榜</span>
+                                </h4>
+                            </div>
+                            <div id="allTimeLikesContent" class="space-y-4">
+                                <!-- 历史点赞总榜内容将通过JavaScript动态生成 -->
+                            </div>
+                        </div>
+                        
+                        <!-- 历史打赏总榜 -->
+                        <div class="bg-dark p-6 rounded-xl border border-primary/30">
+                            <div class="flex items-center mb-4">
+                                <i class="fa fa-gift text-primary mr-2"></i>
+                                <h4 class="font-semibold">
+                                    <span class="en">Top Rewarded All Time</span>
+                                    <span class="zh hidden">历史打赏总榜</span>
+                                </h4>
+                            </div>
+                            <div id="allTimeRewardsContent" class="space-y-4">
+                                <!-- 历史打赏总榜内容将通过JavaScript动态生成 -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark-light py-12 border-t border-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <div id="footerLogoDiv" class="flex items-center space-x-2 mb-6 cursor-pointer hover:text-secondary transition-colors">
+                        <div class="w-10 h-10 rounded-full overflow-hidden">
+                            <img src="images/XDOGlogo.jpg" alt="XDOG Logo" class="w-full h-full object-contain">
+                        </div>
+                        <span id="footerXdogSpan" class="font-display font-bold text-xl cursor-pointer hover:text-secondary transition-colors">XDOG</span>
+                    </div>
+                    
+                    <p class="text-gray-400 mb-6">
+                        <span class="en">The ultimate meme coin revolutionizing the crypto space with fun and community.</span>
+                        <span class="zh hidden">终极meme币，通过乐趣和社区革新加密货币领域。</span>
+                    </p>
+                    
+                    <div class="flex space-x-4">
+                        <a href="https://x.com/xdog_meme?s=09" class="w-10 h-10 rounded-full bg-dark flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary/20 transition-colors">
+                            <i class="fa fa-twitter"></i>
+                        </a>
+
+                        <a href="#" onclick="copyTgLink(); return false;" class="w-10 h-10 rounded-full bg-dark flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary/20 transition-colors cursor-pointer">
+                            <i class="fa fa-telegram"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-display font-semibold text-lg mb-6">
+                        <span class="en">Quick Links</span>
+                        <span class="zh hidden">快速链接</span>
+                    </h4>
+                    
+                    <ul class="space-y-3">
+                        <li><a href="index.html#about" class="text-gray-400 hover:text-secondary transition-colors">
+                            <span class="en">About</span>
+                            <span class="zh hidden">关于</span>
+                        </a></li>
+                        <li><a href="index.html#okx" class="text-gray-400 hover:text-secondary transition-colors">
+                            <span class="en">OKX Guide</span>
+                            <span class="zh hidden">OKX指南</span>
+                        </a></li>
+                        <li><a href="index.html#dex" class="text-gray-400 hover:text-secondary transition-colors">
+                            <span class="en">Web3 OKX BRIDGE Guide</span>
+                            <span class="zh hidden">Web3欧意交易所跨链桥使用指南</span>
+                        </a></li>
+                        <li><a href="index.html#media" class="text-gray-400 hover:text-secondary transition-colors">
+                            <span class="en">Media</span>
+                            <span class="zh hidden">媒体</span>
+                        </a></li>
+                        <li><a href="meme-creation.html" class="text-gray-400 hover:text-secondary transition-colors">
+                            <span class="en">Meme Creation</span>
+                            <span class="zh hidden">XDOG meme创作</span>
+                        </a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-display font-semibold text-lg mb-6">
+                        <span class="en">Resources</span>
+                        <span class="zh hidden">资源</span>
+                    </h4>
+                    
+                    <ul class="space-y-3">
+                        <li><a href="docs/XDOG_WHITE_PAPER_EN_V1.0.pdf" class="text-gray-400 hover:text-secondary transition-colors">
+                            <span class="en">White Paper</span>
+                            <span class="zh hidden">白皮书</span>
+                        </a></li>
+                        <li><a href="docs/XDOG_WHITE_PAPER_CN_V1.0.pdf" class="text-gray-400 hover:text-secondary transition-colors">
+                            <span class="en">White Paper (CN)</span>
+                            <span class="zh hidden">白皮书（中文）</span>
+                        </a></li>
+                        <li><a href="#" id="developerListToggle" class="text-gray-400 hover:text-secondary transition-colors">
+                            <span class="en">Developer List</span>
+                            <span class="zh hidden">开发者名单</span>
+                        </a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-display font-semibold text-lg mb-6">
+                        <span class="en">Legal</span>
+                        <span class="zh hidden">法律</span>
+                    </h4>
+                    
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-secondary transition-colors">
+                            <span class="en">Terms of Service</span>
+                            <span class="zh hidden">服务条款</span>
+                        </a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-secondary transition-colors">
+                            <span class="en">Privacy Policy</span>
+                            <span class="zh hidden">隐私政策</span>
+                        </a></li>
+                        <li><a href="#" id="disclaimerToggle" class="text-gray-400 hover:text-secondary transition-colors">
+                            <span class="en">Disclaimer</span>
+                            <span class="zh hidden">免责声明</span>
+                        </a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 text-sm mb-4 md:mb-0">
+                    <span class="en">© 2025 XDOG. All rights reserved.</span>
+                    <span class="zh hidden">© 2025 XDOG. 保留所有权利。</span>
+                </p>
+                
+                <p class="text-gray-500 text-sm">
+                    <span class="en">XDOG is a meme coin for entertainment purposes only. Invest responsibly.</span>
+                    <span class="zh hidden">XDOG是一种仅用于娱乐目的的meme币。请谨慎投资。</span>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 交互弹窗 -->
+    <div id="interactionModal" class="fixed inset-0 bg-black/70 flex items-center justify-center z-50 hidden">
+        <div class="bg-dark-light rounded-xl p-6 max-w-md w-full mx-4 border border-primary/30">
+            <div class="flex justify-between items-center mb-4">
+                <h3 id="modalTitle" class="font-semibold text-xl">
+                    <span class="en">Like Meme</span>
+                    <span class="zh hidden">点赞表情包</span>
+                </h3>
+                <button id="closeModalBtn" class="text-gray-400 hover:text-white transition-colors">
+                    <i class="fa fa-times text-xl"></i>
+                </button>
+            </div>
+            
+            <div id="modalContent" class="mb-6">
+                <p id="modalMessage">
+                    <span class="en">Are you sure you want to like this meme?</span>
+                    <span class="zh hidden">你确定要点赞这个表情包吗？</span>
+                </p>
+                
+                <!-- 打赏金额选择器 -->
+                <div id="rewardAmountSelector" class="mt-4 hidden">
+                    <label class="block text-gray-300 mb-2">
+                        <span class="en">Reward Amount</span>
+                        <span class="zh hidden">打赏金额</span>
+                    </label>
+                    <div class="flex space-x-2 mb-2">
+                        <button class="reward-amount-btn px-3 py-1 border border-gray-700 rounded hover:border-secondary transition-colors active" data-amount="1">1 XDOG</button>
+                        <button class="reward-amount-btn px-3 py-1 border border-gray-700 rounded hover:border-secondary transition-colors" data-amount="5">5 XDOG</button>
+                        <button class="reward-amount-btn px-3 py-1 border border-gray-700 rounded hover:border-secondary transition-colors" data-amount="10">10 XDOG</button>
+                    </div>
+                    <input type="number" id="customRewardAmount" min="1" step="1" class="w-full bg-dark border border-gray-700 rounded-lg p-2 text-white focus:border-secondary outline-none" placeholder="Custom amount">
+                </div>
+            </div>
+            
+            <div class="flex space-x-4">
+                <button id="cancelModalBtn" class="flex-1 py-2 bg-dark border border-gray-700 rounded-lg hover:bg-dark-light transition-colors">
+                    <span class="en">Cancel</span>
+                    <span class="zh hidden">取消</span>
+                </button>
+                <button id="confirmModalBtn" class="flex-1 py-2 bg-secondary text-dark font-medium rounded-lg hover:bg-secondary/80 transition-colors">
+                    <span class="en">Confirm</span>
+                    <span class="zh hidden">确认</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 通知弹窗 -->
+    <div id="notification" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-dark-light p-4 rounded-lg shadow-lg z-50 max-w-sm border border-primary/30 hidden">
+        <div class="flex items-start">
+            <i id="notificationIcon" class="fa fa-info-circle text-primary mt-1 mr-3"></i>
+            <div>
+                <p id="notificationMessage" class="text-gray-300"></p>
+            </div>
+            <button id="closeNotificationBtn" class="ml-4 text-gray-400 hover:text-white transition-colors">
+                <i class="fa fa-times"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- 免责声明弹窗 -->
+    <div id="disclaimerPopup" class="hidden fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-dark-light p-4 rounded-lg shadow-lg z-50 max-w-sm border border-gray-700">
+        <span class="en block text-sm text-gray-300">
+            XDOG is a meme coin created for entertainment purposes only. This is not financial advice. Always do your own research before investing. The value of cryptocurrency can fluctuate dramatically.
+        </span>
+        <span class="zh hidden block text-sm text-gray-300">
+            XDOG是一种仅用于娱乐目的的meme币。这不是财务建议。投资前请务必进行自己的研究。加密货币的价值可能会大幅波动。
+        </span>
+    </div>
+    
+    <!-- 开发者名单弹窗 -->
+    <div id="developerPopup" class="hidden fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-dark-light p-4 rounded-lg shadow-lg z-50 max-w-sm border border-gray-700">
+        <h4 class="font-display font-semibold text-lg mb-3">
+            <span class="en">Developer List</span>
+            <span class="zh hidden">开发者名单</span>
+        </h4>
+        <ul class="space-y-2">
+            <li class="text-gray-300">XTOBY</li>
+        </ul>
+    </div>
+
+    <!-- 脚本 -->
+    <script src="meme-creation.js"></script>
+</body>
+</html>
