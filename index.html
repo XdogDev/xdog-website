@@ -98,6 +98,10 @@
                     <span class="en">Media</span>
                     <span class="zh hidden">媒体</span>
                 </a>
+                <a href="chat.html" class="nav-link hover:text-secondary transition-colors bg-primary/10 px-4 py-1 rounded-full border border-primary/30 hover:border-secondary">
+                    <span class="en">XDOG Chat</span>
+                    <span class="zh hidden">XDOG聊天室</span>
+                </a>
                 <button id="langToggle" class="flex items-center space-x-1 px-3 py-1 rounded-full border border-primary/30 hover:border-secondary transition-colors">
                     <span class="en">中文</span>
                     <span class="zh hidden">English</span>
@@ -128,6 +132,10 @@
                 <a href="#media" class="mobile-nav-link hover:text-secondary transition-colors py-2">
                     <span class="en">Media</span>
                     <span class="zh hidden">媒体</span>
+                </a>
+                <a href="chat.html" class="mobile-nav-link hover:text-secondary transition-colors py-2 bg-primary/10 px-4 rounded-full border border-primary/30 hover:border-secondary w-fit">
+                    <span class="en">XDOG Chat</span>
+                    <span class="zh hidden">XDOG聊天室</span>
                 </a>
                 <button id="mobileLangToggle" class="flex items-center space-x-1 px-3 py-2 rounded-full border border-primary/30 hover:border-secondary transition-colors w-fit">
                     <span class="en">中文</span>
@@ -639,27 +647,7 @@
                     </ul>
                 </div>
                 
-                <div>
-                    <h4 class="font-display font-semibold text-lg mb-6">
-                        <span class="en">Legal</span>
-                        <span class="zh hidden">法律</span>
-                    </h4>
-                    
-                    <ul class="space-y-3">
-                        <li><a href="#" class="text-gray-400 hover:text-secondary transition-colors">
-                            <span class="en">Terms of Service</span>
-                            <span class="zh hidden">服务条款</span>
-                        </a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-secondary transition-colors">
-                            <span class="en">Privacy Policy</span>
-                            <span class="zh hidden">隐私政策</span>
-                        </a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-secondary transition-colors">
-                            <span id="disclaimerToggle" class="en">Disclaimer</span>
-                            <span id="disclaimerToggleZh" class="zh hidden">免责声明</span>
-                        </a></li>
-                    </ul>
-                </div>
+                <div>                    <h4 class="font-display font-semibold text-lg mb-6">                        <span class="en">Legal</span>                        <span class="zh hidden">法律</span>                    </h4>                    <ul class="space-y-3">                        <li><a href="#" class="text-gray-400 hover:text-secondary transition-colors">                            <span class="en">Terms of Service</span>                            <span class="zh hidden">服务条款</span>                        </a></li>                        <li><a href="#" class="text-gray-400 hover:text-secondary transition-colors">                            <span class="en">Privacy Policy</span>                            <span class="zh hidden">隐私政策</span>                        </a></li>                        <li><a href="#" class="text-gray-400 hover:text-secondary transition-colors">                            <span id="disclaimerToggle" class="en">Disclaimer</span>                            <span id="disclaimerToggleZh" class="zh hidden">免责声明</span>                        </a></li>                    </ul>                </div>                <!-- 访问统计 -->                <div>                    <h4 class="font-display font-semibold text-lg mb-6">                        <span class="en">Visits</span>                        <span class="zh hidden">访问统计</span>                    </h4>                    <div class="space-y-3">                        <div class="flex justify-between items-center">                            <span class="text-gray-400">                                <span class="en">Total Visits:</span>                                <span class="zh hidden">总访问量:</span>                            </span>                            <span id="totalVisits" class="text-secondary font-medium">0</span>                        </div>                        <div class="flex justify-between items-center">                            <span class="text-gray-400">                                <span class="en">Today's Visits:</span>                                <span class="zh hidden">今日访问量:</span>                            </span>                            <span id="todayVisits" class="text-secondary font-medium">0</span>                        </div>                    </div>                </div>
                 
                 <!-- 免责声明弹窗 -->
                 <div id="disclaimerPopup" class="hidden fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-dark-light p-4 rounded-lg shadow-lg z-50 max-w-sm border border-gray-700">
@@ -697,7 +685,7 @@
         </div>
     </footer>
 
-    <!-- 脚本 -->
+    <!-- 脚本 -->    <!-- 访问统计脚本 -->    <script src="visit-counter.js"></script>
     <script>
         // 导航栏滚动效果
         const navbar = document.getElementById('navbar');
