@@ -545,11 +545,46 @@
                         <span class="zh hidden">成为我们不断成长的社区的一员，随时了解最新的XDOG新闻和meme</span>
                     </p>
                     
-                    <div class="flex justify-center mb-12">
-                            <a href="https://x.com/xdog_meme?s=09" class="flex items-center justify-center gap-3 px-6 py-3 bg-[#1DA1F2]/10 hover:bg-[#1DA1F2]/20 text-[#1DA1F2] rounded-full transition-colors">
-                                <i class="fa fa-twitter text-xl"></i>
-                                <span class="en">Follow on Twitter</span>
-                                <span class="zh hidden">关注Twitter</span>
+                    <div class="flex flex-col items-center gap-4 mb-12">
+                            <a href="https://x.com/xdog_meme?s=09" class="flex items-center justify-start gap-3 px-6 py-3 w-[300px] bg-[#1DA1F2]/10 hover:bg-[#1DA1F2]/20 text-[#1DA1F2] rounded-full transition-colors">
+                                <div class="flex flex-col items-center">
+                                    <i class="fa fa-twitter text-xl"></i>
+                                    <span class="text-xs mt-1">X</span>
+                                </div>
+                                <div class="flex-1 text-center">
+                                    <span class="en">Follow on Twitter</span>
+                                    <span class="zh hidden">关注Twitter</span>
+                                </div>
+                            </a>
+                            <a href="#" onclick="copyTgLink()" class="flex items-center justify-start gap-3 px-6 py-3 w-[300px] bg-[#0088CC]/10 hover:bg-[#0088CC]/20 text-[#0088CC] rounded-full transition-colors">
+                                <div class="flex flex-col items-center">
+                                    <i class="fa fa-telegram text-xl"></i>
+                                    <span class="text-xs mt-1">CN</span>
+                                </div>
+                                <div class="flex-1 text-center">
+                                    <span class="en">Copy Chinese Telegram</span>
+                                    <span class="zh hidden">点击复制中文区电报群组</span>
+                                </div>
+                            </a>
+                            <a href="#" onclick="copyInternationalTgLink()" class="flex items-center justify-start gap-3 px-6 py-3 w-[300px] bg-[#0088CC]/10 hover:bg-[#0088CC]/20 text-[#0088CC] rounded-full transition-colors">
+                                <div class="flex flex-col items-center">
+                                    <i class="fa fa-telegram text-xl"></i>
+                                    <span class="text-xs mt-1">EN</span>
+                                </div>
+                                <div class="flex-1 text-center">
+                                    <span class="en">Copy International Telegram</span>
+                                    <span class="zh hidden">点击复制国际区电报群组</span>
+                                </div>
+                            </a>
+                            <a href="#" onclick="showOkxQrCode()" class="flex items-center justify-start gap-3 px-6 py-3 w-[300px] bg-[#FF9500]/10 hover:bg-[#FF9500]/20 text-[#FF9500] rounded-full transition-colors">
+                                <div class="flex flex-col items-center">
+                                    <img src="OKXofficialGroup/OKX_logo.jpg" alt="OKX Logo" class="w-6 h-6 object-contain"/>
+                                    <span class="text-xs mt-1">OKX</span>
+                                </div>
+                                <div class="flex-1 text-center">
+                                    <span class="en">Get XDOG Official OKX Group QR Code</span>
+                                    <span class="zh hidden">点击获取XDOG官方欧易社区群聊组二维码</span>
+                                </div>
                             </a>
                         </div>
                     
@@ -558,6 +593,31 @@
             </div>
         </section>
     </main>
+
+    <!-- OKX官方社区群聊组二维码模态框 -->
+    <div id="okxQrModal" class="fixed inset-0 bg-black/80 flex items-center justify-center z-50 hidden">
+        <div class="relative max-w-2xl max-h-[90vh] p-4">
+            <button onclick="closeOkxQrModal()" class="absolute -top-12 right-0 text-white text-3xl hover:text-gray-300 transition-colors">
+                <i class="fa fa-times"></i>
+            </button>
+            <div class="bg-white p-6 rounded-lg">
+                <h3 class="text-xl font-bold mb-4 text-center">
+                    <span class="en">OKX Official Community Group</span>
+                    <span class="zh hidden">欧易官方社区群聊组</span>
+                </h3>
+                <div class="flex justify-center mb-4">
+                    <img id="okxQrImage" src="OKXofficialGroup/OKXofficialGroup.jpg" alt="OKX Official Group QR Code" class="max-w-full max-h-[60vh] object-contain">
+                </div>
+                <div class="flex justify-center">
+                    <a href="OKXofficialGroup/OKXofficialGroup.jpg" download class="inline-flex items-center gap-2 px-6 py-2 bg-[#FF9500] hover:bg-[#FFB74D] text-white rounded-full transition-colors">
+                        <i class="fa fa-download"></i>
+                        <span class="en">Download QR Code</span>
+                        <span class="zh hidden">下载二维码</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- 页脚 -->
     <footer class="bg-dark-light py-12 border-t border-gray-800">
@@ -578,11 +638,31 @@
                     
                     <div class="flex space-x-4">
                         <a href="https://x.com/xdog_meme?s=09" class="w-10 h-10 rounded-full bg-dark flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary/20 transition-colors">
-                            <i class="fa fa-twitter"></i>
+                            <div class="flex flex-col items-center justify-center">
+                                <i class="fa fa-twitter text-sm"></i>
+                                <span class="text-[10px] mt-0.5">X</span>
+                            </div>
                         </a>
 
                         <a href="#" onclick="copyTgLink(); return false;" class="w-10 h-10 rounded-full bg-dark flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary/20 transition-colors cursor-pointer">
-                            <i class="fa fa-telegram"></i>
+                            <div class="flex flex-col items-center justify-center">
+                                <i class="fa fa-telegram text-sm"></i>
+                                <span class="text-[10px] mt-0.5">CN</span>
+                            </div>
+                        </a>
+                        
+                        <a href="#" onclick="copyInternationalTgLink(); return false;" class="w-10 h-10 rounded-full bg-dark flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary/20 transition-colors cursor-pointer">
+                            <div class="flex flex-col items-center justify-center">
+                                <i class="fa fa-telegram text-sm"></i>
+                                <span class="text-[10px] mt-0.5">EN</span>
+                            </div>
+                        </a>
+                        
+                        <a href="#" onclick="showOkxQrCode(); return false;" class="w-10 h-10 rounded-full bg-dark flex items-center justify-center text-gray-400 hover:text-[#FF9500] hover:bg-[#FF9500]/20 transition-colors cursor-pointer">
+                            <div class="flex flex-col items-center justify-center">
+                                <img src="OKXofficialGroup/OKX_logo.jpg" alt="OKX Logo" class="w-4 h-4 object-contain"/>
+                                <span class="text-[10px] mt-0.5">OKX</span>
+                            </div>
                         </a>
                     </div>
                 </div>
@@ -1273,18 +1353,40 @@
             document.body.removeChild(tempInput);
             
             // 显示提示信息
-            showCopyMessage();
+            showCopyMessage('Telegram');
+        }
+        
+        // 复制国际区Telegram链接函数
+        function copyInternationalTgLink() {
+            const tgLink = 'https://t.me/xdog_international';
+            
+            // 创建临时元素用于复制
+            const tempInput = document.createElement('input');
+            tempInput.value = tgLink;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            
+            // 显示提示信息
+            showCopyMessage('International');
         }
 
         // 显示复制成功提示
-        function showCopyMessage() {
+        function showCopyMessage(type) {
             // 检查当前是否为中文模式
             const isChineseMode = document.querySelector('.zh:not(.hidden)') !== null;
             
             // 创建提示元素
             const messageElement = document.createElement('div');
             messageElement.className = 'fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-primary text-white px-6 py-3 rounded-lg shadow-lg z-50 transition-opacity duration-300';
-            messageElement.textContent = isChineseMode ? '电报频道已复制到剪切板' : 'tg channel has copied';
+            
+            // 根据类型设置提示文本
+            if (type === 'International') {
+                messageElement.textContent = isChineseMode ? '国际区电报频道已复制到剪切板' : 'International tg channel has copied';
+            } else {
+                messageElement.textContent = isChineseMode ? '电报频道已复制到剪切板' : 'tg channel has copied';
+            }
             
             document.body.appendChild(messageElement);
             
@@ -1308,6 +1410,28 @@
             // 在新窗口中打开PDF
             window.open(pdfPath, '_blank');
         }
+    </script>
+    
+    <!-- 欧易官方社区群聊组二维码模态框控制函数 -->
+    <script>
+        function showOkxQrCode() {
+            const modal = document.getElementById('okxQrModal');
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; // 防止背景滚动
+        }
+        
+        function closeOkxQrModal() {
+            const modal = document.getElementById('okxQrModal');
+            modal.classList.add('hidden');
+            document.body.style.overflow = 'auto'; // 恢复背景滚动
+        }
+        
+        // 点击模态框外部关闭
+        document.getElementById('okxQrModal').addEventListener('click', function(event) {
+            if (event.target === this) {
+                closeOkxQrModal();
+            }
+        });
     </script>
 
 </body></html>
