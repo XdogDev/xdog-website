@@ -57,19 +57,19 @@
 </head>
 <body class="bg-dark text-white font-sans overflow-x-hidden">
     <!-- 加载动画视频 -->
-    <div id="loadingScreen" class="fixed inset-0 bg-black z-50 flex items-center justify-center">
+    <!-- <div id="loadingScreen" class="fixed inset-0 bg-black z-50 flex items-center justify-center">
         <div id="loadingContainer" class="w-full h-full flex items-center justify-center">
             <video id="loadingVideo" autoplay muted loop preload="auto" class="w-full h-full object-contain max-w-[100vw] max-h-[100vh]">
                 <source src="images/XDOG_open_video.mp4" type="video/mp4">
                 您的浏览器不支持视频播放。
-            </video>
+            </video> -->
             <!-- 视频加载失败时的备用内容 -->
-            <div id="fallbackLoader" class="hidden absolute inset-0 flex items-center justify-center flex-col bg-black">
+            <!-- <div id="fallbackLoader" class="hidden absolute inset-0 flex items-center justify-center flex-col bg-black">
                 <img src="images/XDOGlogo.jpg" alt="XDOG Logo" class="w-40 h-40 animate-pulse-slow">
                 <p class="mt-4 text-gray-300">正在加载XDOG...</p>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- 导航栏 -->
     <header class="fixed w-full z-50 transition-all duration-300" id="navbar">
         <div class="container mx-auto px-4 py-4 flex justify-between items-center">
@@ -843,86 +843,86 @@
         }
         
         // 优化的视频加载控制
-        document.addEventListener('DOMContentLoaded', function() {
-            const loadingScreen = document.getElementById('loadingScreen');
-            const loadingVideo = document.getElementById('loadingVideo');
-            const fallbackLoader = document.getElementById('fallbackLoader');
+        // document.addEventListener('DOMContentLoaded', function() {
+        //     const loadingScreen = document.getElementById('loadingScreen');
+        //     const loadingVideo = document.getElementById('loadingVideo');
+        //     const fallbackLoader = document.getElementById('fallbackLoader');
             
-            let videoLoaded = false;
-            let loadingTimeout;
-            let checkInterval;
+        //     let videoLoaded = false;
+        //     let loadingTimeout;
+        //     let checkInterval;
             
-            // 立即开始尝试加载视频
-            loadingVideo.load();
+        //     // 立即开始尝试加载视频
+        //     loadingVideo.load();
             
-            // 视频加载成功事件
-            loadingVideo.addEventListener('loadeddata', function() {
-                videoLoaded = true;
-                console.log('视频加载成功，可以流畅播放');
-                startMonitoring();
-            });
+        //     // 视频加载成功事件
+        //     loadingVideo.addEventListener('loadeddata', function() {
+        //         videoLoaded = true;
+        //         console.log('视频加载成功，可以流畅播放');
+        //         startMonitoring();
+        //     });
             
-            // 视频加载错误事件
-            loadingVideo.addEventListener('error', function(e) {
-                console.error('视频加载失败:', e);
-                showFallbackLoader();
-            });
+        //     // 视频加载错误事件
+        //     loadingVideo.addEventListener('error', function(e) {
+        //         console.error('视频加载失败:', e);
+        //         showFallbackLoader();
+        //     });
             
-            // 视频暂停事件（可能是因为缓冲）
-            loadingVideo.addEventListener('pause', function() {
-                if (!videoLoaded && !fallbackLoader.classList.contains('hidden')) {
-                    console.log('视频暂停，可能正在缓冲');
-                    // 尝试重新播放
-                    setTimeout(() => {
-                        if (loadingVideo.paused && videoLoaded) {
-                            loadingVideo.play().catch(err => {
-                                console.error('无法恢复播放:', err);
-                                showFallbackLoader();
-                            });
-                        }
-                    }, 1000);
-                }
-            });
+        //     // 视频暂停事件（可能是因为缓冲）
+        //     loadingVideo.addEventListener('pause', function() {
+        //         if (!videoLoaded && !fallbackLoader.classList.contains('hidden')) {
+        //             console.log('视频暂停，可能正在缓冲');
+        //             // 尝试重新播放
+        //             setTimeout(() => {
+        //                 if (loadingVideo.paused && videoLoaded) {
+        //                     loadingVideo.play().catch(err => {
+        //                         console.error('无法恢复播放:', err);
+        //                         showFallbackLoader();
+        //                     });
+        //                 }
+        //             }, 1000);
+        //         }
+        //     });
             
-            // 显示备用加载动画
-            function showFallbackLoader() {
-                loadingVideo.style.display = 'none';
-                fallbackLoader.classList.remove('hidden');
-                // 备用加载也设置超时
-                setTimeout(hideLoading, 8000);
-            }
+        //     // 显示备用加载动画
+        //     function showFallbackLoader() {
+        //         loadingVideo.style.display = 'none';
+        //         fallbackLoader.classList.remove('hidden');
+        //         // 备用加载也设置超时
+        //         setTimeout(hideLoading, 8000);
+        //     }
             
-            // 监控视频播放进度
-            function startMonitoring() {
-                // 定期检查视频播放进度
-                checkInterval = setInterval(() => {
-                    if (loadingVideo.duration > 0 && (loadingVideo.duration - loadingVideo.currentTime) < 0.5) {
-                        clearInterval(checkInterval);
-                        hideLoading();
-                    }
-                }, 100); // 每100毫秒检查一次
-            }
+        //     // 监控视频播放进度
+        //     function startMonitoring() {
+        //         // 定期检查视频播放进度
+        //         checkInterval = setInterval(() => {
+        //             if (loadingVideo.duration > 0 && (loadingVideo.duration - loadingVideo.currentTime) < 0.5) {
+        //                 clearInterval(checkInterval);
+        //                 hideLoading();
+        //             }
+        //         }, 100); // 每100毫秒检查一次
+        //     }
             
-            // 设置加载超时
-            loadingTimeout = setTimeout(() => {
-                if (!videoLoaded) {
-                    console.warn('视频加载超时，显示备用加载动画');
-                    showFallbackLoader();
-                }
-            }, 3000);
+        //     // 设置加载超时
+        //     loadingTimeout = setTimeout(() => {
+        //         if (!videoLoaded) {
+        //             console.warn('视频加载超时，显示备用加载动画');
+        //             showFallbackLoader();
+        //         }
+        //     }, 3000);
             
-            // 隐藏加载界面
-            function hideLoading() {
-                clearTimeout(loadingTimeout);
-                if (checkInterval) clearInterval(checkInterval);
+        //     // 隐藏加载界面
+        //     function hideLoading() {
+        //         clearTimeout(loadingTimeout);
+        //         if (checkInterval) clearInterval(checkInterval);
                 
-                loadingScreen.style.opacity = '0';
-                loadingScreen.style.transition = 'opacity 0.5s ease-out';
-                setTimeout(() => {
-                    loadingScreen.style.display = 'none';
-                }, 500);
-            }
-        });
+        //         loadingScreen.style.opacity = '0';
+        //         loadingScreen.style.transition = 'opacity 0.5s ease-out';
+        //         setTimeout(() => {
+        //             loadingScreen.style.display = 'none';
+        //         }, 500);
+        //     }
+        // });
         
         // 语言切换功能
         const langToggle = document.getElementById('langToggle');
