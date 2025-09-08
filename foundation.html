@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XDOG十亿美金计划基金会</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FFCC00',
+                        secondary: '#FF9900',
+                        dark: '#121212',
+                        'dark-light': '#1E1E1E',
+                        'dark-lighter': '#2A2A2A',
+                        gold: '#FFD700',
+                        'gold-dark': '#B8860B'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                },
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            }
+            .gold-gradient {
+                background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #B8860B 100%);
+            }
+            .gold-text {
+                background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #B8860B 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+                text-fill-color: transparent;
+            }
+        }
+    </style>
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1E1E1E;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #FFCC00;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #FFA500;
+        }
+        .infinite-symbol {
+            font-size: 48px;
+            color: #FFD700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            }
+            to {
+                text-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 30px rgba(255, 165, 0, 0.6);
+            }
+        }
+        .foundation-container {
+            opacity: 0;
+            animation: fadeIn 1s ease-in forwards;
+        }
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+        .back-button:hover {
+            transform: translateX(-5px);
+            transition: transform 0.3s ease;
+        }
+        .feature-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255, 215, 0, 0.2);
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- 导航栏 -->
+    <nav class="bg-dark-light/80 backdrop-blur-md sticky top-0 z-50 border-b border-primary/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <div class="text-2xl font-bold gold-text">
+                        <span class="mr-1"><i class="fa fa-paw"></i></span>XDOG
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="back-button" class="back-button px-4 py-2 rounded-full bg-dark-lighter border border-primary/30 text-primary hover:bg-primary/20 transition duration-300 flex items-center">
+                        <i class="fa fa-arrow-left mr-2"></i>
+                        <span>返回名人堂</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主要内容 -->
+    <main class="foundation-container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <!-- 标题部分 -->
+        <div class="text-center mb-16">
+            <div class="inline-block mb-4 p-4 rounded-full bg-dark-lighter border-4 border-primary/30">
+                <i class="fa fa-university text-5xl gold-text"></i>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 gold-text">XDOG十亿美金计划基金会</h1>
+            <div class="w-32 h-1 gold-gradient mx-auto mb-6 rounded-full"></div>
+            <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                为支持 X Layer 生态和 $XDOG 社区发展，布仔首批斥资 2100 OKB 成立 $XDOG 社区维稳基金
+            </p>
+        </div>
+
+        <!-- 无穷符号 -->
+        <div class="text-center mb-16">
+            <div class="inline-block p-8 rounded-full bg-dark-lighter border border-primary/30">
+                <span class="infinite-symbol">∞</span>
+            </div>
+        </div>
+
+        <!-- 基金会计划详情 -->
+        <div class="max-w-4xl mx-auto bg-dark-light rounded-3xl p-8 md:p-12 border border-primary/30 mb-16">
+            <h2 class="text-2xl font-bold mb-8 gold-text">#XDOG10亿美金计划 用途</h2>
+            
+            <div class="space-y-8">
+                <!-- 计划1 -->
+                <div class="feature-card bg-dark-lighter rounded-xl p-6 border border-primary/20">
+                    <div class="flex items-start">
+                        <div class="w-10 h-10 rounded-full gold-gradient flex items-center justify-center mr-4 text-dark font-bold text-lg flex-shrink-0">1</div>
+                        <p class="text-gray-200">在 10000  $XDOG = 0.21 OKB位置 购入 1 亿枚 $XDOG 。</p>
+                    </div>
+                </div>
+                
+                <!-- 计划2 -->
+                <div class="feature-card bg-dark-lighter rounded-xl p-6 border border-primary/20">
+                    <div class="flex items-start">
+                        <div class="w-10 h-10 rounded-full gold-gradient flex items-center justify-center mr-4 text-dark font-bold text-lg flex-shrink-0">2</div>
+                        <p class="text-gray-200">$XDOG 价格每上涨0.21 OKB，维稳基金售出 100万枚 $XDOG (首笔售出价值约21枚OKB)。售出后维稳基金会同步销毁100万枚 $XDOG ，同时售出所得 OKB 保留在维稳基金内作为 $XDOG 价值托底。</p>
+                    </div>
+                </div>
+                
+                <!-- 计划3 -->
+                <div class="feature-card bg-dark-lighter rounded-xl p-6 border border-primary/20">
+                    <div class="flex items-start">
+                        <div class="w-10 h-10 rounded-full gold-gradient flex items-center justify-center mr-4 text-dark font-bold text-lg flex-shrink-0">3</div>
+                        <p class="text-gray-200">维稳基金视情况提高托底价格。</p>
+                    </div>
+                </div>
+                
+                <!-- 计划4 -->
+                <div class="feature-card bg-dark-lighter rounded-xl p-6 border border-primary/20">
+                    <div class="flex items-start">
+                        <div class="w-10 h-10 rounded-full gold-gradient flex items-center justify-center mr-4 text-dark font-bold text-lg flex-shrink-0">4</div>
+                        <p class="text-gray-200">若 $XDOG 价格未触及卖出价格，则所有购得的 $XDOG 永久锁仓。</p>
+                    </div>
+                </div>
+                
+                <!-- 计划5 -->
+                <div class="feature-card bg-dark-lighter rounded-xl p-6 border border-primary/20">
+                    <div class="flex items-start">
+                        <div class="w-10 h-10 rounded-full gold-gradient flex items-center justify-center mr-4 text-dark font-bold text-lg flex-shrink-0">5</div>
+                        <p class="text-gray-200">若维稳基金完成1亿枚 $XDOG 购买并资金耗尽，则对维稳基金进行再次补充。</p>
+                    </div>
+                </div>
+                
+                <!-- 计划6 -->
+                <div class="feature-card bg-dark-lighter rounded-xl p-6 border border-primary/20">
+                    <div class="flex items-start">
+                        <div class="w-10 h-10 rounded-full gold-gradient flex items-center justify-center mr-4 text-dark font-bold text-lg flex-shrink-0">6</div>
+                        <p class="text-gray-200">本维稳基金计划在 $XDOG 市值达到10亿美金之前有效。</p>
+                    </div>
+                </div>
+                
+                <!-- 计划7 -->
+                <div class="feature-card bg-dark-lighter rounded-xl p-6 border border-primary/20">
+                    <div class="flex items-start">
+                        <div class="w-10 h-10 rounded-full gold-gradient flex items-center justify-center mr-4 text-dark font-bold text-lg flex-shrink-0">7</div>
+                        <div>
+                            <p class="text-gray-200 mb-2">维稳基金会定期公布回购和销毁记录，实盘地址：0xfd0f7d8a9fc80d5c83241182582aff915cba7fab</p>
+                            <button class="px-4 py-2 rounded-full bg-primary/20 border border-primary/40 text-primary hover:bg-primary/30 transition duration-300 text-sm mt-2">
+                                <i class="fa fa-external-link mr-1"></i> 查看区块链地址
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 合作方 -->
+        <div class="text-center mb-16">
+            <h2 class="text-2xl font-bold mb-8 gold-text">合作方</h2>
+            <div class="flex flex-wrap justify-center gap-6">
+                <div class="px-6 py-3 rounded-full bg-dark-lighter border border-primary/30 text-primary">@wallet</div>
+                <div class="px-6 py-3 rounded-full bg-dark-lighter border border-primary/30 text-primary">@OKXWallet_CN</div>
+                <div class="px-6 py-3 rounded-full bg-dark-lighter border border-primary/30 text-primary">@DYORSWAPDEX</div>
+                <div class="px-6 py-3 rounded-full bg-dark-lighter border border-primary/30 text-primary">@okx</div>
+                <div class="px-6 py-3 rounded-full bg-dark-lighter border border-primary/30 text-primary">@CtoXdog</div>
+            </div>
+        </div>
+
+        <!-- 创始人信息 -->
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-3xl font-bold text-dark">
+                <i class="fa fa-user-circle"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-2 text-primary">@布仔</h3>
+            <p class="text-gray-400 mb-6">XDOG创始人 & 基金会发起人</p>
+            <button class="px-8 py-3 rounded-full bg-gradient-to-r from-primary to-secondary text-dark font-bold hover:shadow-lg hover:shadow-primary/20 transition duration-300">
+                联系创始人
+            </button>
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark-lighter border-t border-primary/30 py-8 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="text-2xl font-bold gold-text mb-4">
+                    <span class="mr-1"><i class="fa fa-paw"></i></span>XDOG
+                </div>
+                <p class="text-gray-400 mb-6">XDOG十亿美金计划基金会 - 为XDOG社区的未来而努力</p>
+                <div class="flex justify-center space-x-4 mb-6">
+                    <a href="#" class="text-primary hover:text-secondary transition duration-300">
+                        <i class="fa fa-twitter text-xl"></i>
+                    </a>
+                    <a href="#" class="text-primary hover:text-secondary transition duration-300">
+                        <i class="fa fa-telegram text-xl"></i>
+                    </a>
+                    <a href="#" class="text-primary hover:text-secondary transition duration-300">
+                        <i class="fa fa-discord text-xl"></i>
+                    </a>
+                    <a href="#" class="text-primary hover:text-secondary transition duration-300">
+                        <i class="fa fa-github text-xl"></i>
+                    </a>
+                </div>
+                <p class="text-gray-500 text-sm">© 2025 XDOG Foundation. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // 返回按钮功能
+        document.getElementById('back-button').addEventListener('click', function() {
+            window.history.back();
+        });
+
+        // 页面加载动画
+        document.addEventListener('DOMContentLoaded', function() {
+            const foundationContainer = document.querySelector('.foundation-container');
+            foundationContainer.style.opacity = '1';
+        });
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

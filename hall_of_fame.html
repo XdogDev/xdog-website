@@ -1,0 +1,1610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hall of Fame - XDOG</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#6C5CE7',
+                        secondary: '#00F5D4',
+                        dark: '#16161A',
+                        'dark-light': '#242629',
+                        'dark-lighter': '#2D3035',
+                    },
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif'],
+                    },
+                },
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 0 0 8px rgba(108, 92, 231, 0.5);
+            }
+            .bg-glass {
+                background: rgba(36, 38, 41, 0.8);
+                backdrop-filter: blur(8px);
+            }
+            .scrollbar-hide::-webkit-scrollbar {
+                display: none;
+            }
+            .scrollbar-hide {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
+        }
+    </style>
+    <style>
+            body {
+                font-family: 'Inter', sans-serif;
+                background-color: #16161A;
+                color: #FFFFFE;
+                background-image: radial-gradient(circle at top right, rgba(108, 92, 231, 0.15), transparent 40%),
+                                  radial-gradient(circle at bottom left, rgba(0, 245, 212, 0.1), transparent 40%);
+                background-attachment: fixed;
+            }
+            
+            .gold-gradient {
+                background: linear-gradient(135deg, rgba(251, 191, 36, 0.2) 0%, rgba(217, 119, 6, 0.3) 100%);
+            }
+            
+            .silver-gradient {
+                background: linear-gradient(135deg, rgba(226, 232, 240, 0.2) 0%, rgba(148, 163, 184, 0.3) 100%);
+            }
+            
+            .bronze-gradient {
+                background: linear-gradient(135deg, rgba(217, 119, 6, 0.2) 0%, rgba(180, 83, 9, 0.3) 100%);
+            }
+            
+            .trophy-icon {
+                animation: glow 2s ease-in-out infinite alternate;
+            }
+            
+            @keyframes glow {
+                from {
+                    text-shadow: 0 0 5px rgba(251, 191, 36, 0.5), 0 0 10px rgba(251, 191, 36, 0.3);
+                }
+                to {
+                    text-shadow: 0 0 10px rgba(251, 191, 36, 0.8), 0 0 20px rgba(251, 191, 36, 0.5);
+                }
+            }
+            
+            .contribution-card {
+                transition: all 0.3s ease;
+            }
+            
+            .contribution-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 25px -5px rgba(108, 92, 231, 0.2);
+            }
+            
+            /* 贡献者榜单滚动容器样式 */
+            .contributors-scroll-container {
+                max-height: 400px;
+                overflow-y: auto;
+                border-radius: 12px;
+                box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.2);
+            }
+            
+            /* 自定义滚动条样式 */
+            .contributors-scroll-container::-webkit-scrollbar,
+            .timeline-scroll-container::-webkit-scrollbar {
+                width: 8px;
+            }
+            
+            .contributors-scroll-container::-webkit-scrollbar-track,
+            .timeline-scroll-container::-webkit-scrollbar-track {
+                background: rgba(255, 255, 255, 0.05);
+                border-radius: 4px;
+            }
+            
+            .contributors-scroll-container::-webkit-scrollbar-thumb,
+            .timeline-scroll-container::-webkit-scrollbar-thumb {
+                background: rgba(108, 92, 231, 0.5);
+                border-radius: 4px;
+                transition: background 0.3s ease;
+            }
+            
+            .contributors-scroll-container::-webkit-scrollbar-thumb:hover,
+            .timeline-scroll-container::-webkit-scrollbar-thumb:hover {
+                background: rgba(108, 92, 231, 0.8);
+            }
+            
+            /* 表格头部固定样式 */
+            table thead {
+                position: sticky;
+                top: 0;
+                z-index: 10;
+                background-color: var(--dark-lighter);
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            }
+            
+            /* 滚动提示样式 */
+            .scroll-hint {
+                text-align: center;
+                margin-top: 0.5rem;
+                color: var(--text-secondary);
+                font-size: 0.85rem;
+            }
+        </style>
+</head>
+<body class="font-inter">
+    <!-- 导航栏 -->
+    <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="index.html" class="flex items-center space-x-2">
+                <img src="images/XDOGlogo.jpg" alt="XDOG Logo" class="w-10 h-10 object-contain">
+                <span class="text-xl font-bold text-white">XDOG</span>
+            </a>
+            
+            <!-- 桌面导航 -->
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="index.html#about" class="nav-link hover:text-secondary transition-colors">
+                    <span class="en">About</span>
+                    <span class="zh hidden">关于</span>
+                </a>
+                <a href="index.html#okx" class="nav-link hover:text-secondary transition-colors">
+                    <span class="en">OKX Guide</span>
+                    <span class="zh hidden">OKX指南</span>
+                </a>
+                <a href="index.html#dex" class="nav-link hover:text-secondary transition-colors">
+                    <span class="en">Web3 OKX BRIDGE Guide</span>
+                    <span class="zh hidden">Web3欧意交易所跨链桥使用指南</span>
+                </a>
+                <a href="index.html#media" class="nav-link hover:text-secondary transition-colors">
+                    <span class="en">Media</span>
+                    <span class="zh hidden">媒体</span>
+                </a>
+                <a href="hall_of_fame.html" class="nav-link hover:text-secondary transition-colors px-4 py-1 rounded-full bg-gradient-to-r from-yellow-500/20 to-yellow-600/30 border border-yellow-500/40 text-yellow-400">
+                    <span class="en">Hall of Fame</span>
+                    <span class="zh hidden">名人堂</span>
+                </a>
+                <button id="langToggle" class="flex items-center space-x-1 px-3 py-1 rounded-full border border-primary/30 hover:border-secondary transition-colors">
+                    <span class="en">中文</span>
+                    <span class="zh hidden">English</span>
+                </button>
+            </nav>
+            
+            <!-- 移动端菜单按钮 -->
+            <button id="menuToggle" class="md:hidden text-2xl">
+                <i class="fa fa-bars"></i>
+            </button>
+        </div>
+        
+        <!-- 移动端导航菜单 -->
+        <div id="mobileMenu" class="md:hidden bg-dark-light absolute w-full left-0 top-full py-4 px-4 hidden">
+            <div class="flex flex-col space-y-4">
+                <a href="index.html#about" class="mobile-nav-link hover:text-secondary transition-colors py-2">
+                    <span class="en">About</span>
+                    <span class="zh hidden">关于</span>
+                </a>
+                <a href="index.html#okx" class="mobile-nav-link hover:text-secondary transition-colors py-2">
+                    <span class="en">OKX Guide</span>
+                    <span class="zh hidden">OKX指南</span>
+                </a>
+                <a href="index.html#dex" class="mobile-nav-link hover:text-secondary transition-colors py-2">
+                    <span class="en">Web3 OKX BRIDGE Guide</span>
+                    <span class="zh hidden">Web3欧意交易所跨链桥使用指南</span>
+                </a>
+                <a href="index.html#media" class="mobile-nav-link hover:text-secondary transition-colors py-2">
+                    <span class="en">Media</span>
+                    <span class="zh hidden">媒体</span>
+                </a>
+                <a href="hall_of_fame.html" class="mobile-nav-link hover:text-secondary transition-colors py-2 px-4 rounded-full bg-gradient-to-r from-yellow-500/20 to-yellow-600/30 border border-yellow-500/40 text-yellow-400">
+                    <span class="en">Hall of Fame</span>
+                    <span class="zh hidden">名人堂</span>
+                </a>
+                <button id="mobileLangToggle" class="flex items-center space-x-1 px-3 py-2 rounded-full border border-primary/30 hover:border-secondary transition-colors w-fit">
+                    <span class="en">中文</span>
+                    <span class="zh hidden">English</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 pt-32 pb-16">
+        <!-- 页面标题 -->
+        <section class="text-center mb-16">
+            <h1 class="text-5xl md:text-6xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-amber-600">
+                <i class="fa fa-trophy trophy-icon mr-4"></i>
+                <span class="en">Hall of Fame</span>
+                <span class="zh hidden">名人堂</span>
+                <i class="fa fa-trophy trophy-icon ml-4"></i>
+            </h1>
+            <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                <span class="en">Celebrating the extraordinary contributions of our community members who have shaped XDOG's journey.</span>
+                <span class="zh hidden">表彰为XDOG发展历程做出杰出贡献的社区成员。</span>
+            </p>
+        </section>
+
+        <!-- 最高荣誉殿堂 -->
+        <section class="mb-20">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-4xl font-bold mb-12 text-center">
+                    <i class="fa fa-diamond text-yellow-400 trophy-icon mr-4"></i>
+                    <span class="en">Hall of Honor</span>
+                    <span class="zh hidden">最高荣誉殿堂</span>
+                    <i class="fa fa-diamond text-yellow-400 trophy-icon ml-4"></i>
+                </h2>
+                
+                <div class="flex justify-center">
+                    <!-- 创始人 -->
+                    <div class="bg-gradient-to-br from-yellow-500/10 to-yellow-600/20 rounded-2xl p-8 border border-yellow-500/30 relative overflow-hidden max-w-2xl w-full">
+                        <div class="absolute -right-8 -top-8 w-40 h-40 bg-yellow-500/10 rounded-full blur-xl"></div>
+                        <div class="absolute -left-8 -bottom-8 w-40 h-40 bg-yellow-600/10 rounded-full blur-xl"></div>
+                        
+                        <div class="relative z-10">
+                            <h3 class="text-2xl font-bold mb-6 text-center text-yellow-400">
+                                <span class="en">Community Cornerstones</span>
+                                <span class="zh hidden">社区基石</span>
+                            </h3>
+                            
+                            <div class="space-y-6">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <div class="w-12 h-12 rounded-full bg-yellow-500/20 flex items-center justify-center mr-4 border border-yellow-500/40">
+                                            <i class="fa fa-star text-yellow-400"></i>
+                                        </div>
+                                        <div>
+                                            <p class="font-bold text-lg">@布仔</p>
+                                            <p class="text-yellow-300 text-sm">
+                                                <span class="en">Fully Funded Founder by XDOG Billion Goal Foundation</span>
+                                                <span class="zh hidden">XDOG十亿目标基金会全额资助创始人</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="text-yellow-400">
+                                        <i class="fa fa-crown text-2xl"></i>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <div class="w-12 h-12 rounded-full bg-yellow-500/20 flex items-center justify-center mr-4 border border-yellow-500/40">
+                                            <i class="fa fa-star text-yellow-400"></i>
+                                        </div>
+                                        <div>
+                                            <p class="font-bold text-lg">@BULL.OKX</p>
+                                            <p class="text-yellow-300 text-sm">
+                                                <span class="en">International XDOG community founder</span>
+                                                <span class="zh hidden">国际XDOG社区创始人</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="text-yellow-400">
+                                        <i class="fa fa-crown text-2xl"></i>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <div class="w-12 h-12 rounded-full bg-yellow-500/20 flex items-center justify-center mr-4 border border-yellow-500/40">
+                                            <i class="fa fa-star text-yellow-400"></i>
+                                        </div>
+                                        <div>
+                                            <p class="font-bold text-lg">@不二和尚9999.btc</p>
+                                            <p class="text-yellow-300 text-sm">
+                                                <span class="en">XDOG Community's earliest organizer and spiritual leader</span>
+                                                <span class="zh hidden">XDOG社区最早组织者，社区灵魂人物</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="text-yellow-400">
+                                        <i class="fa fa-crown text-2xl"></i>
+                                    </div>
+                                </div>
+                                 
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <div class="w-12 h-12 rounded-full bg-yellow-500/20 flex items-center justify-center mr-4 border border-yellow-500/40">
+                                            <i class="fa fa-star text-yellow-400"></i>
+                                        </div>
+                                        <div>
+                                            <p class="font-bold text-lg">@伞公司</p>
+                                            <p class="text-yellow-300 text-sm">
+                                                <span class="en">Current XDOG community organizer and leader</span>
+                                                <span class="zh hidden">XDOG社区现任组织者，社区领袖人物</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="text-yellow-400">
+                                        <i class="fa fa-crown text-2xl"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-12 text-center text-gray-400">
+                    <p>
+                        <span class="en">These exceptional individuals have made invaluable contributions that shaped the destiny of XDOG.</span>
+                        <span class="zh hidden">这些杰出人士做出了不可估量的贡献，塑造了XDOG的命运。</span>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 社区建设者板块 -->
+        <section class="mb-20">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <i class="fa fa-users text-primary mr-4"></i>
+                <span class="en">Community Builders</span>
+                <span class="zh hidden">社区建设者</span>
+                <i class="fa fa-users text-primary ml-4"></i>
+            </h2>
+            
+            <!-- 冲推组 -->
+            <div class="mb-12">
+                <div class="max-w-4xl mx-auto">
+                    <h3 class="text-2xl font-bold mb-6 text-center text-primary">
+                        <i class="fa fa-bullhorn mr-3"></i>
+                        <span class="en">Promotion Team</span>
+                        <span class="zh hidden">宣传组</span>
+                    </h3>
+                    <div class="bg-gradient-to-br from-primary/10 to-primary/20 rounded-2xl p-6 border border-primary/30">
+                        <div class="text-center py-8">
+                            <p class="text-lg font-bold text-primary">正在统计中，并欢迎屏幕前你的加入</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 管理组 -->
+            <div class="mb-12">
+                <div class="max-w-4xl mx-auto">
+                    <h3 class="text-2xl font-bold mb-6 text-center text-secondary">
+                        <i class="fa fa-shield mr-3"></i>
+                        <span class="en">Management Team</span>
+                        <span class="zh hidden">管理组</span>
+                    </h3>
+                    <div class="bg-gradient-to-br from-secondary/10 to-secondary/20 rounded-2xl p-6 border border-secondary/30">
+                        <div class="text-center py-8">
+                            <p class="text-lg font-bold text-secondary">正在统计中</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 美工组 -->
+            <div class="mb-12">
+                <div class="max-w-4xl mx-auto">
+                    <h3 class="text-2xl font-bold mb-6 text-center text-purple-400">
+                        <i class="fa fa-paint-brush mr-3"></i>
+                        <span class="en">Design Team</span>
+                        <span class="zh hidden">美工组</span>
+                    </h3>
+                    <div class="bg-gradient-to-br from-purple-500/10 to-purple-500/20 rounded-2xl p-6 border border-purple-500/30">
+                        <div class="text-center py-8">
+                            <p class="text-lg font-bold text-purple-400">正在统计中，并欢迎屏幕前你的加入</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 技术组 -->
+            <div>
+                <div class="max-w-4xl mx-auto">
+                    <h3 class="text-2xl font-bold mb-6 text-center text-amber-400">
+                        <i class="fa fa-code mr-3"></i>
+                        <span class="en">Technical Team</span>
+                        <span class="zh hidden">技术组</span>
+                    </h3>
+                    <div class="bg-gradient-to-br from-amber-500/10 to-amber-500/20 rounded-2xl p-6 border border-amber-500/30">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="contribution-card bg-dark-lighter rounded-xl p-4 border border-amber-500/20">
+                                <div class="text-center">
+                                    <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-amber-500/20 flex items-center justify-center text-xl font-bold text-amber-400 border-2 border-amber-500/40">
+                                        <i class="fa fa-bolt"></i>
+                                    </div>
+                                    <h4 class="font-bold text-lg mb-2">@jaydon</h4>
+                                    <p class="text-sm text-gray-300">
+                                        <span class="en">Data Beacon: Community official website server provider</span>
+                                        <span class="zh hidden">数据灯塔：社区官网服务器提供者</span>
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div class="contribution-card bg-dark-lighter rounded-xl p-4 border border-amber-500/20">
+                                <div class="text-center">
+                                    <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-amber-500/20 flex items-center justify-center text-xl font-bold text-amber-400 border-2 border-amber-500/40">
+                                        <i class="fa fa-bolt"></i>
+                                    </div>
+                                    <h4 class="font-bold text-lg mb-2">@Xtrategy</h4>
+                                    <p class="text-sm text-gray-300">
+                                        <span class="en">The Starting Point of the Community Official Website: Community official website domain name donor</span>
+                                        <span class="zh hidden">社区官网的起点：社区官网域名捐赠者</span>
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div class="contribution-card bg-dark-lighter rounded-xl p-4 border border-amber-500/20">
+                                <div class="text-center">
+                                    <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-amber-500/20 flex items-center justify-center text-xl font-bold text-amber-400 border-2 border-amber-500/40">
+                                        <i class="fa fa-bolt"></i>
+                                    </div>
+                                    <h4 class="font-bold text-lg mb-2">@杯酒渐浓</h4>
+                                    <p class="text-sm text-gray-300">
+                                        <span class="en">Community Official Website Foundation Builder: Community official website project deployment</span>
+                                        <span class="zh hidden">社区官网地基建设者：社区官网项目部署</span>
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div class="contribution-card bg-dark-lighter rounded-xl p-4 border border-amber-500/20">
+                                <div class="text-center">
+                                    <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-amber-500/20 flex items-center justify-center text-xl font-bold text-amber-400 border-2 border-amber-500/40">
+                                        <i class="fa fa-bolt"></i>
+                                    </div>
+                                    <h4 class="font-bold text-lg mb-2">@Xtoby.OKX</h4>
+                                    <p class="text-sm text-gray-300">
+                                        <span class="en">Community Official Website Decoration Architect: Community official website iterative development</span>
+                                        <span class="zh hidden">社区官网装修建筑师：社区官网迭代开发</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 名人堂顶部贡献者 -->
+        <section id="top-contributors-section" class="mb-20">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="en">Top Contributors</span>
+                <span class="zh hidden">顶级贡献者</span>
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- 第一名 -->
+                <div class="contribution-card rounded-2xl p-6 gold-gradient border border-yellow-500/50">
+                    <div class="text-center">
+                        <div class="w-24 h-24 mx-auto mb-4 rounded-full bg-dark-lighter flex items-center justify-center text-4xl font-bold text-yellow-400 border-4 border-yellow-500/50">1</div>
+                        <h3 class="text-2xl font-bold mb-2">
+                            <span class="en">Top Contributor</span>
+                            <span class="zh hidden">顶级贡献者</span>
+                        </h3>
+                        <p class="text-yellow-400 mb-4">布仔</p>
+                        <div class="w-16 h-1 bg-gradient-to-r from-yellow-400 to-amber-600 mx-auto mb-4 rounded-full"></div>
+                        <p class="text-3xl font-bold text-yellow-300 mb-6">100,000 <span class="text-lg">XDOG</span></p>
+                        <p class="text-gray-300">
+                            <span class="en">Community founding member and major contributor</span>
+                            <span class="zh hidden">社区创始成员和主要贡献者</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 第二名 -->
+                <div class="contribution-card rounded-2xl p-6 silver-gradient border border-gray-400/50">
+                    <div class="text-center">
+                        <div class="w-24 h-24 mx-auto mb-4 rounded-full bg-dark-lighter flex items-center justify-center text-4xl font-bold text-gray-300 border-4 border-gray-400/50">2</div>
+                        <h3 class="text-2xl font-bold mb-2">
+                            <span class="en">Key Supporter</span>
+                            <span class="zh hidden">关键支持者</span>
+                        </h3>
+                        <p class="text-gray-300 mb-4">不二和尚9999.btc</p>
+                        <div class="w-16 h-1 bg-gradient-to-r from-gray-300 to-gray-500 mx-auto mb-4 rounded-full"></div>
+                        <p class="text-3xl font-bold text-gray-200 mb-6">100,000 <span class="text-lg">XDOG</span></p>
+                        <p class="text-gray-300">
+                            <span class="en">Major donor supporting community development</span>
+                            <span class="zh hidden">支持社区发展的主要捐赠者</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 第三名 -->
+                <div class="contribution-card rounded-2xl p-6 bronze-gradient border border-amber-700/50">
+                    <div class="text-center">
+                        <div class="w-24 h-24 mx-auto mb-4 rounded-full bg-dark-lighter flex items-center justify-center text-4xl font-bold text-amber-600 border-4 border-amber-700/50">3</div>
+                        <h3 class="text-2xl font-bold mb-2">
+                            <span class="en">Valued Donor</span>
+                            <span class="zh hidden">尊贵捐赠者</span>
+                        </h3>
+                        <p class="text-amber-600 mb-4">碳黑丶OKX</p>
+                        <div class="w-16 h-1 bg-gradient-to-r from-amber-600 to-amber-800 mx-auto mb-4 rounded-full"></div>
+                        <p class="text-3xl font-bold text-amber-400 mb-6">100,000 <span class="text-lg">XDOG</span></p>
+                        <p class="text-gray-300">
+                            <span class="en">Generous supporter of the XDOG community</span>
+                            <span class="zh hidden">XDOG社区的慷慨支持者</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 关键事件时间线 -->
+        <section class="mb-20">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="en">Key Milestone Events</span>
+                <span class="zh hidden">关键里程碑事件</span>
+            </h2>
+            <div class="max-w-4xl mx-auto">
+                <!-- 时间轴滚动容器 -->
+                <div class="timeline-scroll-container max-h-[600px] overflow-y-auto pr-4 py-2">
+                    <div class="relative min-h-[550px]">
+                        <!-- 时间轴线 -->
+                        <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-primary to-secondary rounded-full"></div>
+                
+                <!-- 事件 2 -->
+                <div class="event mb-16 relative">
+                    <div class="flex flex-col md:flex-row items-center">
+                        <div class="md:w-1/2 md:pr-12 md:text-right mb-6 md:mb-0">
+                            <h3 class="text-2xl font-bold mb-2 text-secondary">
+                                <span class="en">First Voluntary Donation by Community Whales</span>
+                                <span class="zh hidden">社区大户第一次自愿捐赠</span>
+                            </h3>
+                            <p class="text-gray-300 mb-2">September 4, 2025</p>
+                            <p class="text-gray-400">
+                                <span class="en">Community initiated fundraising to prepare funds for community development and management.The Hall of Fame is established in honor of community members' dedication to the community's development. We will forever remember those comrades who have contributed, and continue to contribute, to the community, and it will also inspire comrades to strive unceasingly for the community in the future.</span>
+                                <span class="zh hidden">社区发起募捐，筹备资金用于社区发展管理。名人堂就是为了纪念社区成员为了社区的发展做出的奉献而设立，我们将永远记住那些曾经、现在为社区做出过贡献的同志们，也将激励同志们在未来继续为社区不懈奋斗</span>
+                            </p>
+                        </div>
+                        <div class="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 rounded-full bg-secondary border-4 border-dark z-10 flex items-center justify-center">
+                            <i class="fa fa-code text-dark"></i>
+                        </div>
+                        <div class="md:w-1/2 md:pr-12 order-1 md:order-2">
+                            <div class="bg-dark-light rounded-xl p-4 border border-primary/30 ml-8">
+                                <h4 class="font-bold mb-2 text-primary">
+                                    <span class="en">Key Contributors:</span>
+                                    <span class="zh hidden">关键贡献者：</span>
+                                </h4>
+                                <ul class="space-y-2">
+                                    <li class="flex justify-between items-center">
+                                        <span>@tech_wizard</span>
+                                        <span class="text-yellow-400">3,000 XP</span>
+                                    </li>
+                                    <li class="flex justify-between items-center">
+                                        <span>@developer_one</span>
+                                        <span class="text-yellow-400">2,200 XP</span>
+                                    </li>
+                                    <li class="flex justify-between items-center">
+                                        <span>@design_maestro</span>
+                                        <span class="text-yellow-400">1,800 XP</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+
+                
+                <!-- 事件 4 -->
+                <div class="event mb-16 relative">
+                    <div class="flex flex-col md:flex-row items-center">
+                        <div class="md:w-1/2 md:pr-12 order-2 md:order-1">
+                            <div class="bg-dark-light rounded-xl p-6 border border-primary/30">
+                                <h4 class="font-bold mb-2 text-primary">
+                                    <span class="en">Key Contributors:</span>
+                                    <span class="zh hidden">关键贡献者：</span>
+                                </h4>
+                                <div class="text-center py-4">
+                                    <p class="text-xl font-bold text-primary mb-2 flex justify-center items-center">
+                                        <span>@BULL.OKX</span>
+                                        <span class="ml-3 text-2xl" style="color: #FFD700; text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);">∞</span>
+                                    </p>
+                                    <p class="text-xl font-bold text-primary mb-4 flex justify-center items-center">
+                                        <span>番茄</span>
+                                        <span class="ml-3 text-2xl" style="color: #FFD700; text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);">∞</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 rounded-full bg-secondary border-4 border-dark z-10 flex items-center justify-center">
+                            <i class="fa fa-handshake-o text-dark"></i>
+                        </div>
+                        <div class="md:w-1/2 md:pl-12 md:text-left mb-6 md:mb-0 order-1 md:order-2">
+                            <h3 class="text-2xl font-bold mb-2 text-secondary">
+                                <span class="en">XDOG Community Goes Global: The Story of BULL.OKX and Tomato</span>
+                                <span class="zh hidden">XDOG社区推向国际：BULL.OKX与番茄的故事</span>
+                            </h3>
+                            <p class="text-gray-300 mb-2">2025年8月22日 | August 22, 2025</p>
+                            <p class="text-gray-400">
+                                <span class="en">Tomato made contact with international friend Mr. Bull, gained his recognition for the XDOG community, and under Mr. Bull's guidance, the XDOG community embarked on an international journey.</span>
+                                <span class="zh hidden">番茄与国际友人公牛先生取得联系，并让公牛先生认可了XDOG社区，随后，在公牛先生的指引下，XDOG社区走上了国际化道路</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 事件 1 -->
+                <div class="event mb-16 relative">
+                    <div class="flex flex-col md:flex-row items-center" onclick="window.location.href='foundation.html'" style="cursor: pointer;">
+                        <div class="md:w-1/2 md:pr-12 md:text-right mb-6 md:mb-0">
+                            <h3 class="text-2xl font-bold mb-2 text-secondary">
+                                <span class="en">XDOG One Billion Dollar Initiative Foundation Established </span>
+                                <span class="zh hidden">XDOG十亿美金计划基金会成立</span>
+                            </h3>
+                            <p class="text-gray-300 mb-2">2025年8月22日 | August 22, 2025</p>
+                            <p class="text-gray-400">
+                                <span class="en">The conspiracy group retreats, XDOG's dawn emerges. The beginning of XDOG's pure DAO meme community, the rebirth of XDOG community. Bu Zai laid the foundation of XDOG community with 2100 OKB.</span>
+                                <span class="zh hidden">阴谋集团撤退，XDOG曙光初现。XDOG纯DAO meme社区的伊始，XDOG社区的新生。布仔携2100枚OKB奠定XDOG社区基石。</span>
+                            </p>
+                        </div>
+                        <div class="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 rounded-full bg-primary border-4 border-dark z-10 flex items-center justify-center">
+                            <i class="fa fa-rocket text-white"></i>
+                        </div>
+                        <div class="md:w-1/2 md:pl-12">
+                            <div class="bg-dark-light rounded-xl p-6 border border-primary/30">
+                                <h4 class="font-bold mb-2 text-primary">
+                                    <span class="en">Key Contributors:</span>
+                                    <span class="zh hidden">关键贡献者：</span>
+                                </h4>
+                                <div class="text-center py-6">
+                                    <p class="text-xl font-bold text-primary mb-4">@布仔</p>
+                                    <div class="infinite-symbol text-4xl" style="font-size: 48px; color: #FFD700; text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);">∞</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 滚动提示 -->
+                <div class="text-center mt-4 text-sm text-gray-400">
+                    <span class="en">Scroll to view all milestone events</span>
+                    <span class="zh hidden">滚动查看所有里程碑事件</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 贡献度榜单 -->
+        <section>
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="en">Contribution Leaderboard</span>
+                <span class="zh hidden">贡献度榜单</span>
+            </h2>
+            <div class="overflow-x-auto">
+                <div class="contributors-scroll-container max-h-[400px] overflow-y-auto">
+                    <table class="w-full max-w-4xl mx-auto bg-dark-light rounded-xl overflow-hidden">
+                        <thead class="bg-dark-lighter border-b border-primary/30 sticky top-0">
+                            <tr>
+                                <th class="py-4 px-6 text-left">
+                                    <span class="en">Rank</span>
+                                    <span class="zh hidden">排名</span>
+                                </th>
+                                <th class="py-4 px-6 text-left">
+                                    <span class="en">Member</span>
+                                    <span class="zh hidden">成员</span>
+                                </th>
+                                <th class="py-4 px-6 text-left">
+                                    <span class="en">Total XP</span>
+                                    <span class="zh hidden">总贡献值</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="contributorsTableBody">
+                            <!-- 所有贡献者数据将通过JavaScript动态加载 -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="text-center mt-4 text-sm text-gray-400">
+                <span class="en">Scroll to view all contributors</span>
+                <span class="zh hidden">滚动查看所有贡献者</span>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark-lighter py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
+                            <span class="text-xl font-bold">X</span>
+                        </div>
+                        <span class="text-xl font-bold text-white">XDOG</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">
+                        <span class="en">A community-driven decentralized project focused on innovation and growth.</span>
+                        <span class="zh hidden">一个以社区为导向的去中心化项目，专注于创新和成长。</span>
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-secondary transition-colors">
+                            <i class="fa fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-secondary transition-colors">
+                            <i class="fa fa-telegram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-secondary transition-colors">
+                            <i class="fa fa-discord text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-secondary transition-colors">
+                            <i class="fa fa-medium text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-4">
+                        <span class="en">Quick Links</span>
+                        <span class="zh hidden">快速链接</span>
+                    </h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html#about" class="text-gray-400 hover:text-secondary transition-colors">
+                            <span class="en">About</span>
+                            <span class="zh hidden">关于</span>
+                        </a></li>
+                        <li><a href="index.html#okx" class="text-gray-400 hover:text-secondary transition-colors">
+                            <span class="en">OKX Guide</span>
+                            <span class="zh hidden">OKX指南</span>
+                        </a></li>
+                        <li><a href="index.html#dex" class="text-gray-400 hover:text-secondary transition-colors">
+                            <span class="en">Web3 OKX BRIDGE Guide</span>
+                            <span class="zh hidden">Web3欧意交易所跨链桥使用指南</span>
+                        </a></li>
+                        <li><a href="index.html#media" class="text-gray-400 hover:text-secondary transition-colors">
+                            <span class="en">Media</span>
+                            <span class="zh hidden">媒体</span>
+                        </a></li>
+                        <li><a href="hall_of_fame.html" class="text-gray-400 hover:text-secondary transition-colors">
+                            <span class="en">Hall of Fame</span>
+                            <span class="zh hidden">名人堂</span>
+                        </a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-4">
+                        <span class="en">Resources</span>
+                        <span class="zh hidden">资源</span>
+                    </h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-secondary transition-colors">
+                            <span class="en">Whitepaper</span>
+                            <span class="zh hidden">白皮书</span>
+                        </a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-secondary transition-colors">
+                            <span class="en">Documentation</span>
+                            <span class="zh hidden">文档</span>
+                        </a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-secondary transition-colors">
+                            <span class="en">Blog</span>
+                            <span class="zh hidden">博客</span>
+                        </a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-secondary transition-colors">
+                            <span class="en">FAQ</span>
+                            <span class="zh hidden">常见问题</span>
+                        </a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-4">
+                        <span class="en">Legal</span>
+                        <span class="zh hidden">法律</span>
+                    </h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-secondary transition-colors">
+                            <span class="en">Terms of Service</span>
+                            <span class="zh hidden">服务条款</span>
+                        </a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-secondary transition-colors">
+                            <span class="en">Privacy Policy</span>
+                            <span class="zh hidden">隐私政策</span>
+                        </a></li>
+                        <li><a href="#" id="disclaimerLink" class="text-gray-400 hover:text-secondary transition-colors">
+                            <span class="en">Disclaimer</span>
+                            <span class="zh hidden">免责声明</span>
+                        </a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-6 text-center">
+                <p class="text-gray-500">
+                    <span class="en">&copy; 2023 XDOG. All rights reserved.</span>
+                    <span class="zh hidden">&copy; 2023 XDOG. 保留所有权利。</span>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 引入贡献者数据文件 -->
+    <script src="donation_contributors_data.js"></script>
+    <!-- 全局变量存储数据 -->
+    <script>
+        // 从donation_contributors_data.js获取捐赠数据
+        // 由于已经在上面引入了JS文件，这里不需要重新定义donationContributorsData变量
+        let eventContributorsData = {};
+        
+        // 获取捐赠数据
+        async function fetchDonationData() {
+            try {
+                // 直接使用已经加载的全局变量
+                if (typeof donationContributorsData === 'undefined' || !donationContributorsData || donationContributorsData.length === 0) {
+                    throw new Error('捐赠数据未加载');
+                }
+                
+                // 定义不参与排名的用户列表
+                const excludedUsers = ['布仔', '不二和尚9999.btc', 'BULL.OKX', '伞公司'];
+                
+                // 过滤掉不参与排名的用户
+                const filteredContributors = donationContributorsData.filter(contributor => 
+                    !excludedUsers.includes(contributor.username.trim())
+                );
+                
+                return filteredContributors;
+            } catch (error) {
+                console.error('获取捐赠数据失败:', error);
+                // 如果数据未加载，使用mock数据作为备用，确保不包含被排除的用户
+                return [
+                    { rank: 1, username: "碳黑丶OKX ", donation: 100000.0, icon: "user", areas: { en: "Donor", zh: "捐赠者" } },
+                    { rank: 2, username: "1XDOG=1USDT.OKX ", donation: 100000.0, icon: "user", areas: { en: "Donor", zh: "捐赠者" } },
+                    { rank: 3, username: " One ", donation: 50000.0, icon: "user", areas: { en: "Donor", zh: "捐赠者" } },
+                    { rank: 4, username: "万万陈", donation: 44302.0, icon: "user", areas: { en: "Donor", zh: "捐赠者" } },
+                    { rank: 5, username: "故人重逢 ", donation: 18888.0, icon: "user", areas: { en: "Donor", zh: "捐赠者" } }
+                ];
+            }
+        }
+        
+        // 获取事件数据
+        async function fetchEventData() {
+            try {
+                // 对于事件数据，我们仍然使用mock数据
+                eventContributorsData = {
+                    event1: {
+                        title: { en: "Project Inception", zh: "项目启动" },
+                        date: "March 15, 2023",
+                        contributors: [
+                            { username: '@crypto_visionary', xp: 3200, role: { en: 'Founder', zh: '创始人' } },
+                            { username: '@tech_wizard', xp: 3000, role: { en: 'Lead Developer', zh: '首席开发者' } }
+                        ]
+                    }
+                };
+                return eventContributorsData;
+            } catch (error) {
+                console.error('获取事件数据失败:', error);
+                // 返回默认的事件数据
+                return {
+                    event1: {
+                        title: { en: "Project Inception", zh: "项目启动" },
+                        date: "March 15, 2023",
+                        contributors: [
+                            { username: '@crypto_visionary', xp: 3200, role: { en: 'Founder', zh: '创始人' } },
+                            { username: '@tech_wizard', xp: 3000, role: { en: 'Lead Developer', zh: '首席开发者' } }
+                        ]
+                    }
+                };
+            }
+        }
+        
+        // 预加载所有数据
+        async function preloadAllData() {
+            try {
+                // 并行获取两种数据
+                await Promise.all([fetchDonationData(), fetchEventData()]);
+                console.log('所有数据加载完成');
+                return true;
+            } catch (error) {
+                console.error('数据加载失败:', error);
+                return false;
+            }
+        }
+    </script>
+    
+    <!-- JavaScript -->
+    <script>
+        // 导航栏滚动效果
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-dark-light', 'shadow-lg');
+                navbar.classList.remove('bg-transparent');
+            } else {
+                navbar.classList.remove('bg-dark-light', 'shadow-lg');
+                navbar.classList.add('bg-transparent');
+            }
+        });
+
+        // 移动端菜单切换
+        const menuToggle = document.getElementById('menuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 语言切换功能
+        const langToggle = document.getElementById('langToggle');
+        const mobileLangToggle = document.getElementById('mobileLangToggle');
+        let currentLang = 'en';
+
+        function toggleLanguage() {
+            const enElements = document.querySelectorAll('.en');
+            const zhElements = document.querySelectorAll('.zh');
+            
+            if (currentLang === 'en') {
+                enElements.forEach(el => el.classList.add('hidden'));
+                zhElements.forEach(el => el.classList.remove('hidden'));
+                currentLang = 'zh';
+            } else {
+                enElements.forEach(el => el.classList.remove('hidden'));
+                zhElements.forEach(el => el.classList.add('hidden'));
+                currentLang = 'en';
+            }
+        }
+
+        langToggle.addEventListener('click', toggleLanguage);
+        mobileLangToggle.addEventListener('click', toggleLanguage);
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+
+        // 为事件框添加点击功能
+        const eventContainers = document.querySelectorAll('.event');
+        eventContainers.forEach((container, index) => {
+            // 为每个事件添加唯一ID
+            const eventId = 'event' + (index + 1);
+            container.setAttribute('data-event-id', eventId);
+            
+            // 添加交互样式
+            container.style.cursor = 'pointer';
+            container.style.transition = 'transform 0.3s, box-shadow 0.3s';
+            
+            container.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px)';
+                this.style.boxShadow = '0 10px 25px -5px rgba(101, 31, 255, 0.2)';
+            });
+            
+            container.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+                this.style.boxShadow = 'none';
+            });
+        });
+        
+        // 创建贡献者详情模态框
+        function createContributorsModal() {
+            const modal = document.createElement('div');
+            modal.id = 'contributorsModal';
+            modal.className = 'fixed inset-0 bg-black/80 z-50 hidden flex items-center justify-center p-4';
+            modal.innerHTML = `
+                <div class="bg-dark-light rounded-xl max-w-3xl w-full max-h-[90vh] flex flex-col">
+                    <div class="p-6 border-b border-primary/30 flex justify-between items-center">
+                        <h3 id="modalTitle" class="text-2xl font-bold text-secondary"></h3>
+                        <button id="closeModalBtn" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fa fa-times text-xl"></i>
+                        </button>
+                    </div>
+                    <div class="p-6 overflow-y-auto flex-grow">
+                        <div id="contributorsList" class="space-y-3"></div>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+            
+            // 关闭模态框
+            const closeModalBtn = document.getElementById('closeModalBtn');
+            closeModalBtn.addEventListener('click', function() {
+                modal.classList.add('hidden');
+            });
+            
+            // 点击模态框外部关闭
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.classList.add('hidden');
+                }
+            });
+            
+            // ESC键关闭模态框
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+                    modal.classList.add('hidden');
+                }
+            });
+        }
+        
+        // 显示事件贡献者列表
+        function showEventContributors(eventId) {
+            // 获取事件数据
+            const eventData = eventContributorsData[eventId];
+            if (!eventData) return;
+            
+            // 创建模态框（如果不存在）
+            let modal = document.getElementById('contributorsModal');
+            if (!modal) {
+                createContributorsModal();
+                modal = document.getElementById('contributorsModal');
+            }
+            
+            // 更新模态框标题
+            const modalTitle = document.getElementById('modalTitle');
+            const isEnglish = document.querySelector('.en:not(.hidden)') !== null;
+            modalTitle.textContent = `${eventData.title[isEnglish ? 'en' : 'zh']} (${eventData.date})`;
+            
+            // 更新贡献者列表
+            const contributorsList = document.getElementById('contributorsList');
+            contributorsList.innerHTML = '';
+            
+            // 添加贡献者到列表
+            eventData.contributors.forEach((contributor, index) => {
+                const contributorItem = document.createElement('div');
+                contributorItem.className = 'bg-dark p-4 rounded-lg border border-primary/20 flex justify-between items-center hover:border-secondary/50 transition-colors';
+                contributorItem.innerHTML = `
+                    <div class="flex items-center">
+                        <div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center mr-3 text-sm">
+                            <span>${index + 1}</span>
+                        </div>
+                        <div>
+                            <p class="font-semibold">${contributor.username}</p>
+                            <p class="text-sm text-gray-400">
+                                <span class="en">${contributor.role.en}</span>
+                                <span class="zh hidden">${contributor.role.zh}</span>
+                            </p>
+                        </div>
+                    </div>
+                    <span class="text-yellow-400 font-bold">${contributor.xp} XP</span>
+                `;
+                contributorsList.appendChild(contributorItem);
+            });
+            
+            // 显示模态框
+            modal.classList.remove('hidden');
+        }
+        
+        // 为特定事件框添加点击事件监听 - 只为事件2(社区大户第一次自愿捐赠)添加弹窗功能
+        // 使用原生JavaScript查找特定标题的事件div
+        const allEventTitles = document.querySelectorAll('h3 .en');
+        let specificEventDiv = null;
+        
+        allEventTitles.forEach(title => {
+            if (title.textContent.trim() === 'First Voluntary Donation by Community Whales') {
+                specificEventDiv = title.closest('.event');
+            }
+        });
+        
+        if (specificEventDiv) {
+            specificEventDiv.addEventListener('click', function() {
+                // 显示Excel中的捐赠数据
+                showDonationContributors();
+            });
+        }
+        
+        // 初始化贡献者列表
+        function initContributorsList() {
+            // 使用从Excel文件读取的捐赠数据
+            const allContributors = donationContributorsData;
+            
+            // 定义不参与排名的用户列表
+            const excludedUsers = ['布仔', '不二和尚9999.btc', 'BULL.OKX', '伞公司'];
+            
+            // 过滤掉不参与排名的用户 - 注意去除前后空格进行匹配
+            const rankedContributors = allContributors.filter(contributor => 
+                !excludedUsers.includes(contributor.username.trim())
+            );
+            
+            // 获取表格主体
+            const tableBody = document.getElementById('contributorsTableBody');
+            
+            // 清空表格内容
+            tableBody.innerHTML = '';
+            
+            // 获取当前语言
+            const isEnglish = document.querySelector('.en:not(.hidden)') !== null;
+            
+            // 添加所有参与排名的贡献者
+            rankedContributors.forEach((contributor, index) => {
+                const row = document.createElement('tr');
+                row.className = index < rankedContributors.length - 1 ? 'border-b border-primary/20 hover:bg-dark-lighter/50 transition-colors' : 'hover:bg-dark-lighter/50 transition-colors';
+                
+                // 设置排名颜色
+                let rankColor = '';
+                if (index + 1 === 1) rankColor = 'text-yellow-400';
+                else if (index + 1 === 2) rankColor = 'text-gray-300';
+                else if (index + 1 === 3) rankColor = 'text-amber-600';
+                
+                // 设置捐赠数量颜色
+                let donationColor = '';
+                if (index + 1 <= 3) donationColor = 'text-yellow-300';
+                
+                // 格式化捐赠数量，添加千位分隔符
+                const formattedDonation = contributor.donation.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                
+                // 创建行内容
+                row.innerHTML = `
+                    <td class="py-4 px-6 font-bold ${rankColor}">${index + 1}</td>
+                    <td class="py-4 px-6">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center mr-3">
+                                <i class="fa fa-${contributor.icon} text-primary"></i>
+                            </div>
+                            <span>${contributor.username}</span>
+                        </div>
+                    </td>
+                    <td class="py-4 px-6 font-bold ${donationColor}">${formattedDonation}</td>
+                `;
+                
+                tableBody.appendChild(row);
+            });
+            
+            // 添加语言切换支持
+            const observer = new MutationObserver(mutations => {
+                mutations.forEach(mutation => {
+                    if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                        const enElements = document.querySelectorAll('td .en');
+                        const zhElements = document.querySelectorAll('td .zh');
+                        const isEnglish = document.querySelector('.en:not(.hidden)') !== null;
+                        
+                        enElements.forEach(el => el.classList.toggle('hidden', !isEnglish));
+                        zhElements.forEach(el => el.classList.toggle('hidden', isEnglish));
+                    }
+                });
+            });
+            
+            // 监听语言切换按钮
+            observer.observe(document.getElementById('langToggle'), { attributes: true });
+            observer.observe(document.getElementById('mobileLangToggle'), { attributes: true });
+        }
+        
+        // 显示捐赠贡献者列表在div中
+        function showDonationContributors() {
+            // 获取捐赠数据
+            const allContributors = donationContributorsData;
+            if (!allContributors || allContributors.length === 0) return;
+            
+            // 定义不参与排名的用户列表
+            const excludedUsers = ['布仔', '不二和尚9999.btc', 'BULL.OKX', '伞公司'];
+            
+            // 过滤掉不参与排名的用户，并重新计算排名 - 注意去除前后空格进行匹配
+            const rankedContributors = allContributors.filter(contributor => 
+                !excludedUsers.includes(contributor.username.trim())
+            );
+            
+            // 创建模态框（如果不存在）
+            let modal = document.getElementById('contributorsModal');
+            if (!modal) {
+                createContributorsModal();
+                modal = document.getElementById('contributorsModal');
+            }
+            
+            // 更新模态框标题
+            const modalTitle = document.getElementById('modalTitle');
+            const isEnglish = document.querySelector('.en:not(.hidden)') !== null;
+            modalTitle.textContent = isEnglish ? 'XDOG First Donation Contributors' : 'XDOG首次捐赠贡献者';
+            
+            // 更新贡献者列表
+            const contributorsList = document.getElementById('contributorsList');
+            contributorsList.innerHTML = '';
+            
+            // 添加参与排名的贡献者到列表
+            rankedContributors.forEach((contributor, index) => {
+                const contributorItem = document.createElement('div');
+                contributorItem.className = 'bg-dark p-4 rounded-lg border border-primary/20 flex justify-between items-center hover:border-secondary/50 transition-colors';
+                
+                // 设置排名颜色
+                let rankColor = '';
+                if (index + 1 === 1) rankColor = 'text-yellow-400';
+                else if (index + 1 === 2) rankColor = 'text-gray-300';
+                else if (index + 1 === 3) rankColor = 'text-amber-600';
+                
+                // 格式化捐赠数量，添加千位分隔符
+                const formattedDonation = contributor.donation.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                
+                contributorItem.innerHTML = `
+                    <div class="flex items-center">
+                        <div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center mr-3 text-sm ${rankColor}">
+                            <span>${index + 1}</span>
+                        </div>
+                        <div>
+                            <p class="font-semibold">${contributor.username}</p>
+                            <p class="text-sm text-gray-400">
+                                <span class="en">${contributor.areas.en}</span>
+                                <span class="zh hidden">${contributor.areas.zh}</span>
+                            </p>
+                        </div>
+                    </div>
+                    <span class="text-yellow-400 font-bold">${formattedDonation} XDOG</span>
+                `;
+                contributorsList.appendChild(contributorItem);
+            });
+            
+            // 显示模态框
+            modal.classList.remove('hidden');
+        }
+        
+        // 更新关键贡献者显示：只显示该div总榜排名前三的数据
+        function updateKeyContributors() {
+            // 获取所有捐赠数据
+            const allContributors = donationContributorsData;
+            if (!allContributors || allContributors.length === 0) return;
+
+            // 定义不参与排名的用户列表
+            const excludedUsers = ['布仔', '不二和尚9999.btc', 'BULL.OKX', '伞公司'];
+            
+            // 过滤掉不参与排名的用户 - 注意去除前后空格进行匹配
+            const rankedContributors = allContributors.filter(contributor => 
+                !excludedUsers.includes(contributor.username.trim())
+            );
+
+            // 查找所有关键贡献者的div（针对不同事件中的贡献者列表）
+            const keyContributorsDivs = document.querySelectorAll('.bg-dark-light.rounded-xl');
+            if (keyContributorsDivs.length === 0) return;
+
+            // 为每个关键贡献者div处理数据显示
+            keyContributorsDivs.forEach(div => {
+                // 获取列表元素
+                const contributorsList = div.querySelector('ul.space-y-2');
+                if (!contributorsList) return;
+
+                // 清空现有列表
+                contributorsList.innerHTML = '';
+
+                // 获取前三的捐赠金额，用于处理并列情况
+                const amountsSet = new Set();
+                
+                // 收集所有唯一的捐赠金额并排序
+                rankedContributors.forEach(contributor => {
+                    amountsSet.add(contributor.donation);
+                });
+                
+                // 将唯一金额转换为数组并按降序排序
+                const sortedAmounts = Array.from(amountsSet).sort((a, b) => b - a);
+                
+                // 取前三个最高金额
+                const topThreeAmounts = sortedAmounts.slice(0, 3);
+                
+                // 筛选出捐赠金额属于前三个最高金额的所有贡献者
+                const topContributors = rankedContributors.filter(contributor => 
+                    topThreeAmounts.includes(contributor.donation)
+                );
+                
+                // 如果有符合条件的贡献者
+                if (topContributors.length > 0) {
+                    // 添加所有符合条件的贡献者
+                    topContributors.forEach(contributor => {
+                        // 格式化捐赠数量，添加千位分隔符
+                        const formattedDonation = contributor.donation.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+                        const listItem = document.createElement('li');
+                        listItem.className = 'flex justify-between items-center';
+                        listItem.innerHTML = `
+                            <span>${contributor.username}</span>
+                            <span class="text-yellow-400">${formattedDonation} XDOG</span>
+                        `;
+                        contributorsList.appendChild(listItem);
+                    });
+                } else {
+                    // 如果没有符合条件的贡献者，显示提示信息
+                    const listItem = document.createElement('li');
+                    listItem.className = 'text-center text-gray-400';
+                    const isEnglish = document.querySelector('.en:not(.hidden)') !== null;
+                    listItem.textContent = isEnglish ? 'No contributors found' : '未找到贡献者';
+                    contributorsList.appendChild(listItem);
+                }
+            });
+        }
+        
+        // 更新顶部贡献者卡片信息
+        async function updateTopContributorsCards() {
+            try {
+                // 使用已经过滤过的捐赠数据
+                const filteredContributors = await fetchDonationData();
+                if (!filteredContributors || filteredContributors.length === 0) {
+                    console.error('没有可用的贡献者数据');
+                    return;
+                }
+                
+                console.log('获取到的过滤后贡献者总数:', filteredContributors.length);
+                console.log('过滤后的前5名贡献者:', filteredContributors.slice(0, 5));
+                
+                // 获取前三名贡献者
+                const topContributors = filteredContributors.slice(0, 3);
+                
+                console.log('最终用于显示的前三名贡献者:', topContributors);
+                
+                // 获取前三名贡献者卡片（使用ID选择器，确保准确定位到正确的section）
+                const contributionCards = document.querySelectorAll('#top-contributors-section .contribution-card');
+                
+                // 为每个卡片更新内容
+                contributionCards.forEach((card, index) => {
+                    if (index >= topContributors.length) {
+                        // 如果没有足够的贡献者数据，清空卡片内容
+                        card.innerHTML = '<div class="text-center"><p class="text-gray-400">暂无数据</p></div>';
+                        return;
+                    }
+                    
+                    const contributor = topContributors[index];
+                    
+                    // 找到卡片内的text-center div，这就是用户提到的需要更新的div
+                    const targetDiv = card.querySelector('.text-center');
+                    if (targetDiv) {
+                        console.log(`正在更新第${index+1}名贡献者卡片，用户名为: ${contributor.username.trim()}`);
+                        
+                        // 更新排名
+                        const rankElement = targetDiv.querySelector('.w-24.h-24.rounded-full');
+                        if (rankElement) {
+                            rankElement.textContent = index + 1;
+                        }
+                        
+                        // 更新用户名
+                        const usernameElement = targetDiv.querySelector('h3 + p');
+                        if (usernameElement) {
+                            usernameElement.textContent = contributor.username.trim();
+                        }
+                        
+                        // 更新捐赠数量
+                        const donationElement = targetDiv.querySelector('p.text-3xl.font-bold');
+                        if (donationElement) {
+                            // 格式化捐赠数量，添加千位分隔符
+                            const formattedDonation = contributor.donation.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                            donationElement.innerHTML = `${formattedDonation} <span class="text-lg">XDOG</span>`;
+                        }
+                        
+                        // 更新描述文本
+                        const descElement = targetDiv.querySelector('p.text-gray-300:last-of-type');
+                        if (descElement) {
+                            const enDesc = descElement.querySelector('.en');
+                            const zhDesc = descElement.querySelector('.zh');
+                            
+                            // 根据排名设置不同的描述
+                            let enDescription = '';
+                            let zhDescription = '';
+                            
+                            if (index === 0) {
+                                enDescription = 'Top contributor with exceptional generosity';
+                                zhDescription = '顶级贡献者，展现非凡慷慨';
+                            } else if (index === 1) {
+                                enDescription = 'Outstanding supporter of the community';
+                                zhDescription = '杰出社区支持者';
+                            } else if (index === 2) {
+                                enDescription = 'Valuable contributor to the ecosystem';
+                                zhDescription = '生态系统宝贵贡献者';
+                            }
+                            
+                            if (enDesc) enDesc.textContent = enDescription;
+                            if (zhDesc) zhDesc.textContent = zhDescription;
+                        }
+                    } else {
+                        console.error(`未找到第${index+1}名贡献者卡片的text-center div`);
+                        // 如果没有找到targetDiv，创建一个新的
+                        card.innerHTML = `
+                            <div class="text-center">
+                                <div class="w-24 h-24 mx-auto mb-4 rounded-full bg-dark-lighter flex items-center justify-center text-4xl font-bold ${index === 0 ? 'text-yellow-400 border-4 border-yellow-500/50' : index === 1 ? 'text-gray-300 border-4 border-gray-400/50' : 'text-amber-600 border-4 border-amber-700/50'}">${index + 1}</div>
+                                <h3 class="text-2xl font-bold mb-2">
+                                    <span class="en">${index === 0 ? 'Top Contributor' : index === 1 ? 'Key Supporter' : 'Valued Donor'}</span>
+                                    <span class="zh hidden">${index === 0 ? '顶级贡献者' : index === 1 ? '关键支持者' : '尊贵捐赠者'}</span>
+                                </h3>
+                                <p class="${index === 0 ? 'text-yellow-400' : index === 1 ? 'text-gray-300' : 'text-amber-600'} mb-4">${contributor.username.trim()}</p>
+                                <div class="w-16 h-1 bg-gradient-to-r ${index === 0 ? 'from-yellow-400 to-amber-600' : index === 1 ? 'from-gray-300 to-gray-500' : 'from-amber-600 to-amber-800'} mx-auto mb-4 rounded-full"></div>
+                                <p class="text-3xl font-bold ${index === 0 ? 'text-yellow-300' : index === 1 ? 'text-gray-200' : 'text-amber-400'} mb-6">${contributor.donation.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} <span class="text-lg">XDOG</span></p>
+                                <p class="text-gray-300">
+                                    <span class="en">${index === 0 ? 'Top contributor with exceptional generosity' : index === 1 ? 'Outstanding supporter of the community' : 'Valuable contributor to the ecosystem'}</span>
+                                    <span class="zh hidden">${index === 0 ? '顶级贡献者，展现非凡慷慨' : index === 1 ? '杰出社区支持者' : '生态系统宝贵贡献者'}</span>
+                                </p>
+                            </div>
+                        `;
+                    }
+                    
+                    // 为第一名卡片添加ID属性，方便识别和引用
+                    if (index === 0) {
+                        card.id = 'top-contributor-first';
+                    }
+                });
+                
+                console.log('顶部贡献者卡片更新完成');
+            } catch (error) {
+                console.error('更新顶部贡献者卡片时出错:', error);
+            }
+        }
+        
+        // 页面加载完成后初始化贡献者列表，但不自动显示捐赠数据弹窗
+        document.addEventListener('DOMContentLoaded', async function() {
+            // 显示加载状态
+            const showLoadingIndicator = () => {
+                // 创建加载指示器
+                const loadingDiv = document.createElement('div');
+                loadingDiv.id = 'loadingIndicator';
+                loadingDiv.className = 'fixed inset-0 bg-dark/80 flex flex-col items-center justify-center z-50';
+                loadingDiv.innerHTML = `
+                    <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-primary"></div>
+                    <p class="mt-4 text-lg text-white">加载贡献者数据中...</p>
+                `;
+                document.body.appendChild(loadingDiv);
+            };
+            
+            // 隐藏加载指示器
+            const hideLoadingIndicator = () => {
+                const loadingDiv = document.getElementById('loadingIndicator');
+                if (loadingDiv) {
+                    loadingDiv.remove();
+                }
+            };
+            
+            // 显示加载指示器
+            showLoadingIndicator();
+            
+            try {
+                // 预加载所有数据
+                const dataLoaded = await preloadAllData();
+                
+                if (dataLoaded) {
+                    // 数据加载成功后执行初始化操作
+                initContributorsList();
+                // 更新关键贡献者显示
+                updateKeyContributors();
+                // 从实际榜单数据更新顶级贡献者卡片（注意：现在是异步函数）
+                await updateTopContributorsCards();
+                // 移除了自动显示捐赠贡献者列表的功能，现在只有点击特定div才会显示弹窗
+                } else {
+                    console.error('数据加载失败，使用备用数据继续');
+                }
+            } catch (error) {
+                console.error('初始化过程发生错误:', error);
+            } finally {
+                // 隐藏加载指示器
+                hideLoadingIndicator();
+            }
+            
+            // 为@布仔的div添加点击跳转功能
+            // 1. 社区基石部分的@布仔
+            const buzaiCommunityCornerstone = document.querySelector('div.space-y-6 div:first-child');
+            if (buzaiCommunityCornerstone) {
+                buzaiCommunityCornerstone.style.cursor = 'pointer';
+                buzaiCommunityCornerstone.style.transition = 'transform 0.2s ease';
+                buzaiCommunityCornerstone.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.02)';
+                });
+                buzaiCommunityCornerstone.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1)';
+                });
+                buzaiCommunityCornerstone.addEventListener('click', function() {
+                    window.location.href = 'buzai_profile.html';
+                });
+            }
+            
+            // 2. 关键贡献者部分的@布仔
+            const buzaiKeyContributor = document.querySelector('.bg-dark-light.rounded-xl p.text-xl.font-bold.text-primary.mb-4');
+            if (buzaiKeyContributor && buzaiKeyContributor.textContent.trim() === '@布仔') {
+                const parentCard = buzaiKeyContributor.closest('.bg-dark-light.rounded-xl');
+                if (parentCard) {
+                    parentCard.style.cursor = 'pointer';
+                    parentCard.style.transition = 'transform 0.2s ease, border-color 0.2s ease';
+                    parentCard.addEventListener('mouseenter', function() {
+                        this.style.transform = 'scale(1.02)';
+                        this.style.borderColor = '#FFD700';
+                    });
+                    parentCard.addEventListener('mouseleave', function() {
+                        this.style.transform = 'scale(1)';
+                        this.style.borderColor = 'rgba(79, 70, 229, 0.3)';
+                    });
+                    parentCard.addEventListener('click', function() {
+                        window.location.href = 'buzai_profile.html';
+                    });
+                }
+            }
+            
+            // 为社区基石成员添加点击跳转功能
+            // 1. 社区基石部分 - 使用更精确的选择器
+            const communityCornerstones = document.querySelectorAll('.space-y-6 > div');
+            communityCornerstones.forEach(cornerstone => {
+                const username = cornerstone.querySelector('p.font-bold');
+                if (username) {
+                    const usernameText = username.textContent.trim();
+                    // 为@BULL.OKX添加点击跳转
+                    if (usernameText === '@BULL.OKX') {
+                        cornerstone.style.cursor = 'pointer';
+                        cornerstone.style.transition = 'transform 0.2s ease';
+                        cornerstone.addEventListener('mouseenter', function() {
+                            this.style.transform = 'scale(1.02)';
+                        });
+                        cornerstone.addEventListener('mouseleave', function() {
+                            this.style.transform = 'scale(1)';
+                        });
+                        cornerstone.addEventListener('click', function() {
+                            window.location.href = 'bull_okx_profile.html';
+                        });
+                    }
+                    // 为@不二和尚9999.btc添加点击跳转
+                    else if (usernameText === '@不二和尚9999.btc') {
+                        cornerstone.style.cursor = 'pointer';
+                        cornerstone.style.transition = 'transform 0.2s ease';
+                        cornerstone.addEventListener('mouseenter', function() {
+                            this.style.transform = 'scale(1.02)';
+                        });
+                        cornerstone.addEventListener('mouseleave', function() {
+                            this.style.transform = 'scale(1)';
+                        });
+                        cornerstone.addEventListener('click', function() {
+                            window.location.href = 'buerheshang9999_btc_profile.html';
+                        });
+                    }
+                    // 为@伞公司添加点击跳转
+                    else if (usernameText === '@伞公司') {
+                        cornerstone.style.cursor = 'pointer';
+                        cornerstone.style.transition = 'transform 0.2s ease';
+                        cornerstone.addEventListener('mouseenter', function() {
+                            this.style.transform = 'scale(1.02)';
+                        });
+                        cornerstone.addEventListener('mouseleave', function() {
+                            this.style.transform = 'scale(1)';
+                        });
+                        cornerstone.addEventListener('click', function() {
+                            window.location.href = 'sangongsi_profile.html';
+                        });
+                    }
+                }
+            });
+            
+            // 2. 关键贡献者部分 - 使用更精确的选择器
+            const allContributorCards = document.querySelectorAll('.bg-dark-light.rounded-xl');
+            allContributorCards.forEach(card => {
+                const username = card.querySelector('p.text-xl.font-bold.text-primary.mb-4');
+                if (username) {
+                    const usernameText = username.textContent.trim();
+                    // 为@BULL.OKX添加点击跳转
+                    if (usernameText === '@BULL.OKX') {
+                        card.style.cursor = 'pointer';
+                        card.style.transition = 'transform 0.2s ease, border-color 0.2s ease';
+                        card.addEventListener('mouseenter', function() {
+                            this.style.transform = 'scale(1.02)';
+                            this.style.borderColor = '#FFD700';
+                        });
+                        card.addEventListener('mouseleave', function() {
+                            this.style.transform = 'scale(1)';
+                            this.style.borderColor = 'rgba(79, 70, 229, 0.3)';
+                        });
+                        card.addEventListener('click', function() {
+                            window.location.href = 'bull_okx_profile.html';
+                        });
+                    }
+                    // 为@不二和尚9999.btc添加点击跳转
+                    else if (usernameText === '@不二和尚9999.btc') {
+                        card.style.cursor = 'pointer';
+                        card.style.transition = 'transform 0.2s ease, border-color 0.2s ease';
+                        card.addEventListener('mouseenter', function() {
+                            this.style.transform = 'scale(1.02)';
+                            this.style.borderColor = '#FFD700';
+                        });
+                        card.addEventListener('mouseleave', function() {
+                            this.style.transform = 'scale(1)';
+                            this.style.borderColor = 'rgba(79, 70, 229, 0.3)';
+                        });
+                        card.addEventListener('click', function() {
+                            window.location.href = 'buerheshang9999_btc_profile.html';
+                        });
+                    }
+                    // 为@伞公司添加点击跳转
+                    else if (usernameText === '@伞公司') {
+                        card.style.cursor = 'pointer';
+                        card.style.transition = 'transform 0.2s ease, border-color 0.2s ease';
+                        card.addEventListener('mouseenter', function() {
+                            this.style.transform = 'scale(1.02)';
+                            this.style.borderColor = '#FFD700';
+                        });
+                        card.addEventListener('mouseleave', function() {
+                            this.style.transform = 'scale(1)';
+                            this.style.borderColor = 'rgba(79, 70, 229, 0.3)';
+                        });
+                        card.addEventListener('click', function() {
+                            window.location.href = 'sangongsi_profile.html';
+                        });
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
