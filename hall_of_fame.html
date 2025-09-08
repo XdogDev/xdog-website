@@ -357,7 +357,8 @@
                     </h3>
                     <div class="bg-gradient-to-br from-primary/10 to-primary/20 rounded-2xl p-6 border border-primary/30">
                         <div class="text-center py-8">
-                            <p class="text-lg font-bold text-primary">正在统计中，并欢迎屏幕前你的加入</p>
+                            <p class="text-lg font-bold text-primary en">Statistics are being compiled, and we welcome you to join us. If interested, please contact us in any of our groups.</p>
+                            <p class="text-lg font-bold text-primary zh hidden">正在统计中，并欢迎屏幕前你的加入，有意者请在各群组中联系我们</p>
                         </div>
                     </div>
                 </div>
@@ -373,7 +374,8 @@
                     </h3>
                     <div class="bg-gradient-to-br from-secondary/10 to-secondary/20 rounded-2xl p-6 border border-secondary/30">
                         <div class="text-center py-8">
-                            <p class="text-lg font-bold text-secondary">正在统计中</p>
+                            <p class="text-lg font-bold text-secondary en">Statistics are being compiled, and we welcome you to join us (management recruitment requirements are relatively strict). If interested, please contact us in any of our groups.</p>
+                            <p class="text-lg font-bold text-secondary zh hidden">正在统计中，并欢迎屏幕前你的加入（管理招募要求比较严格），有意者请在各群组中联系我们</p>
                         </div>
                     </div>
                 </div>
@@ -389,7 +391,8 @@
                     </h3>
                     <div class="bg-gradient-to-br from-purple-500/10 to-purple-500/20 rounded-2xl p-6 border border-purple-500/30">
                         <div class="text-center py-8">
-                            <p class="text-lg font-bold text-purple-400">正在统计中，并欢迎屏幕前你的加入</p>
+                            <p class="text-lg font-bold text-purple-400 en">Statistics are being compiled, and we welcome you to join us. If interested, please contact us in any of our groups.</p>
+                            <p class="text-lg font-bold text-purple-400 zh hidden">正在统计中，并欢迎屏幕前你的加入，有意者请在各群组中联系我们</p>
                         </div>
                     </div>
                 </div>
@@ -927,15 +930,30 @@
                 enElements.forEach(el => el.classList.add('hidden'));
                 zhElements.forEach(el => el.classList.remove('hidden'));
                 currentLang = 'zh';
+                // 保存语言设置到localStorage
+                localStorage.setItem('xdogLanguage', 'zh');
             } else {
                 enElements.forEach(el => el.classList.remove('hidden'));
                 zhElements.forEach(el => el.classList.add('hidden'));
                 currentLang = 'en';
+                // 保存语言设置到localStorage
+                localStorage.setItem('xdogLanguage', 'en');
             }
         }
 
         langToggle.addEventListener('click', toggleLanguage);
         mobileLangToggle.addEventListener('click', toggleLanguage);
+
+        // 页面加载时检查保存的语言偏好
+        function checkLanguagePreference() {
+            const savedLang = localStorage.getItem('xdogLanguage');
+            if (savedLang && savedLang !== currentLang) {
+                toggleLanguage();
+            }
+        }
+
+        // 页面加载完成后检查语言偏好
+        document.addEventListener('DOMContentLoaded', checkLanguagePreference);
 
         // 平滑滚动
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {

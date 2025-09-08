@@ -1339,10 +1339,39 @@
         const enElements = document.querySelectorAll('.en');
         const zhElements = document.querySelectorAll('.zh');
         
-        function toggleLanguage() {
-            enElements.forEach(el => el.classList.toggle('hidden'));
-            zhElements.forEach(el => el.classList.toggle('hidden'));
+        // 检查本地存储的语言设置
+        function checkLanguagePreference() {
+            const savedLanguage = localStorage.getItem('xdogLanguage');
+            if (savedLanguage === 'zh') {
+                // 如果保存的是中文，则显示中文，隐藏英文
+                enElements.forEach(el => el.classList.add('hidden'));
+                zhElements.forEach(el => el.classList.remove('hidden'));
+            } else {
+                // 默认显示英文，隐藏中文
+                enElements.forEach(el => el.classList.remove('hidden'));
+                zhElements.forEach(el => el.classList.add('hidden'));
+            }
         }
+        
+        function toggleLanguage() {
+            // 检查当前是否为中文模式
+            const isChineseMode = document.querySelector('.zh:not(.hidden)') !== null;
+            
+            if (isChineseMode) {
+                // 切换到英文
+                enElements.forEach(el => el.classList.remove('hidden'));
+                zhElements.forEach(el => el.classList.add('hidden'));
+                localStorage.setItem('xdogLanguage', 'en');
+            } else {
+                // 切换到中文
+                enElements.forEach(el => el.classList.add('hidden'));
+                zhElements.forEach(el => el.classList.remove('hidden'));
+                localStorage.setItem('xdogLanguage', 'zh');
+            }
+        }
+        
+        // 页面加载时检查语言偏好
+        window.addEventListener('DOMContentLoaded', checkLanguagePreference);
         
         langToggle.addEventListener('click', toggleLanguage);
         mobileLangToggle.addEventListener('click', toggleLanguage);
