@@ -6,6 +6,8 @@
     <title>Hall of Fame - XDOG</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- 语言同步机制 -->
+    <script src="language-sync.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
@@ -600,7 +602,7 @@
                                         <span class="ml-3 text-2xl" style="color: #FFD700; text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);">∞</span>
                                     </p>
                                     <p class="text-xl font-bold text-primary mb-4 flex justify-center items-center">
-                                        <span>番茄</span>
+                                        <span>@番茄</span>
                                         <span class="ml-3 text-2xl" style="color: #FFD700; text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);">∞</span>
                                     </p>
                                 </div>
@@ -701,117 +703,7 @@
         </section>
     </main>
 
-    <!-- 页脚 -->
-    <footer class="bg-dark-lighter py-12">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-                <div>
-                    <div class="flex items-center space-x-2 mb-4">
-                        <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
-                            <span class="text-xl font-bold">X</span>
-                        </div>
-                        <span class="text-xl font-bold text-white">XDOG</span>
-                    </div>
-                    <p class="text-gray-400 mb-4">
-                        <span class="en">A community-driven decentralized project focused on innovation and growth.</span>
-                        <span class="zh hidden">一个以社区为导向的去中心化项目，专注于创新和成长。</span>
-                    </p>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-secondary transition-colors">
-                            <i class="fa fa-twitter text-xl"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-secondary transition-colors">
-                            <i class="fa fa-telegram text-xl"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-secondary transition-colors">
-                            <i class="fa fa-discord text-xl"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-secondary transition-colors">
-                            <i class="fa fa-medium text-xl"></i>
-                        </a>
-                    </div>
-                </div>
-                <div>
-                    <h4 class="text-lg font-bold mb-4">
-                        <span class="en">Quick Links</span>
-                        <span class="zh hidden">快速链接</span>
-                    </h4>
-                    <ul class="space-y-2">
-                        <li><a href="index.html#about" class="text-gray-400 hover:text-secondary transition-colors">
-                            <span class="en">About</span>
-                            <span class="zh hidden">关于</span>
-                        </a></li>
-                        <li><a href="index.html#okx" class="text-gray-400 hover:text-secondary transition-colors">
-                            <span class="en">OKX Guide</span>
-                            <span class="zh hidden">OKX指南</span>
-                        </a></li>
-                        <li><a href="index.html#dex" class="text-gray-400 hover:text-secondary transition-colors">
-                            <span class="en">Web3 OKX BRIDGE Guide</span>
-                            <span class="zh hidden">Web3欧意交易所跨链桥使用指南</span>
-                        </a></li>
-                        <li><a href="index.html#media" class="text-gray-400 hover:text-secondary transition-colors">
-                            <span class="en">Media</span>
-                            <span class="zh hidden">媒体</span>
-                        </a></li>
-                        <li><a href="hall_of_fame.html" class="text-gray-400 hover:text-secondary transition-colors">
-                            <span class="en">Hall of Fame</span>
-                            <span class="zh hidden">名人堂</span>
-                        </a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="text-lg font-bold mb-4">
-                        <span class="en">Resources</span>
-                        <span class="zh hidden">资源</span>
-                    </h4>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-secondary transition-colors">
-                            <span class="en">Whitepaper</span>
-                            <span class="zh hidden">白皮书</span>
-                        </a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-secondary transition-colors">
-                            <span class="en">Documentation</span>
-                            <span class="zh hidden">文档</span>
-                        </a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-secondary transition-colors">
-                            <span class="en">Blog</span>
-                            <span class="zh hidden">博客</span>
-                        </a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-secondary transition-colors">
-                            <span class="en">FAQ</span>
-                            <span class="zh hidden">常见问题</span>
-                        </a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="text-lg font-bold mb-4">
-                        <span class="en">Legal</span>
-                        <span class="zh hidden">法律</span>
-                    </h4>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-secondary transition-colors">
-                            <span class="en">Terms of Service</span>
-                            <span class="zh hidden">服务条款</span>
-                        </a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-secondary transition-colors">
-                            <span class="en">Privacy Policy</span>
-                            <span class="zh hidden">隐私政策</span>
-                        </a></li>
-                        <li><a href="#" id="disclaimerLink" class="text-gray-400 hover:text-secondary transition-colors">
-                            <span class="en">Disclaimer</span>
-                            <span class="zh hidden">免责声明</span>
-                        </a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="border-t border-gray-700 pt-6 text-center">
-                <p class="text-gray-500">
-                    <span class="en">&copy; 2023 XDOG. All rights reserved.</span>
-                    <span class="zh hidden">&copy; 2023 XDOG. 保留所有权利。</span>
-                </p>
-            </div>
-        </div>
-    </footer>
+
 
     <!-- 引入贡献者数据文件 -->
     <script src="donation_contributors_data.js"></script>
@@ -917,43 +809,7 @@
             mobileMenu.classList.toggle('hidden');
         });
 
-        // 语言切换功能
-        const langToggle = document.getElementById('langToggle');
-        const mobileLangToggle = document.getElementById('mobileLangToggle');
-        let currentLang = 'en';
-
-        function toggleLanguage() {
-            const enElements = document.querySelectorAll('.en');
-            const zhElements = document.querySelectorAll('.zh');
-            
-            if (currentLang === 'en') {
-                enElements.forEach(el => el.classList.add('hidden'));
-                zhElements.forEach(el => el.classList.remove('hidden'));
-                currentLang = 'zh';
-                // 保存语言设置到localStorage
-                localStorage.setItem('xdogLanguage', 'zh');
-            } else {
-                enElements.forEach(el => el.classList.remove('hidden'));
-                zhElements.forEach(el => el.classList.add('hidden'));
-                currentLang = 'en';
-                // 保存语言设置到localStorage
-                localStorage.setItem('xdogLanguage', 'en');
-            }
-        }
-
-        langToggle.addEventListener('click', toggleLanguage);
-        mobileLangToggle.addEventListener('click', toggleLanguage);
-
-        // 页面加载时检查保存的语言偏好
-        function checkLanguagePreference() {
-            const savedLang = localStorage.getItem('xdogLanguage');
-            if (savedLang && savedLang !== currentLang) {
-                toggleLanguage();
-            }
-        }
-
-        // 页面加载完成后检查语言偏好
-        document.addEventListener('DOMContentLoaded', checkLanguagePreference);
+        // 注意：语言切换功能已移至 language-sync.js 统一管理
 
         // 平滑滚动
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {

@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>社区基石@不二和尚9999.btc的贡献概览 | Community Cornerstone @不二和尚9999.btc Contribution Overview</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- 语言同步机制 -->
+    <script src="language-sync.js"></script>
     <style>
         /* 基础样式 */
         :root {
@@ -429,30 +431,10 @@
     </div>
 
     <script>
-        // 语言切换功能
+        // 注意：语言切换功能已移至 language-sync.js 统一管理
+        
+        // 平滑滚动效果
         document.addEventListener('DOMContentLoaded', function() {
-            const zhBtn = document.getElementById('zhBtn');
-            const enBtn = document.getElementById('enBtn');
-            const zhElements = document.querySelectorAll('.zh');
-            const enElements = document.querySelectorAll('.en');
-
-            // 切换到中文
-            zhBtn.addEventListener('click', function() {
-                zhBtn.classList.add('active');
-                enBtn.classList.remove('active');
-                zhElements.forEach(el => el.classList.remove('hidden'));
-                enElements.forEach(el => el.classList.add('hidden'));
-            });
-
-            // 切换到英文
-            enBtn.addEventListener('click', function() {
-                enBtn.classList.add('active');
-                zhBtn.classList.remove('active');
-                enElements.forEach(el => el.classList.remove('hidden'));
-                zhElements.forEach(el => el.classList.add('hidden'));
-            });
-
-            // 平滑滚动效果
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function(e) {
                     e.preventDefault();
