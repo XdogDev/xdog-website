@@ -7,6 +7,8 @@
     <link rel="icon" type="image/jpeg" href="images/XDOGlogo.jpg">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- 语言同步机制 -->
+    <script src="language-sync.js"></script>
     <script>
         // Tailwind配置
         tailwind.config = {
@@ -98,6 +100,10 @@
                     <span class="en">Media</span>
                     <span class="zh hidden">媒体</span>
                 </a>
+                <a href="hall_of_fame.html" class="nav-link hover:text-secondary transition-colors px-4 py-1 rounded-full bg-gradient-to-r from-yellow-500/20 to-yellow-600/30 border border-yellow-500/40 text-yellow-400">
+                    <span class="en">Hall of Fame</span>
+                    <span class="zh hidden">名人堂</span>
+                </a>
                 <button id="langToggle" class="flex items-center space-x-1 px-3 py-1 rounded-full border border-primary/30 hover:border-secondary transition-colors">
                     <span class="en">中文</span>
                     <span class="zh hidden">English</span>
@@ -128,6 +134,10 @@
                 <a href="#media" class="mobile-nav-link hover:text-secondary transition-colors py-2">
                     <span class="en">Media</span>
                     <span class="zh hidden">媒体</span>
+                </a>
+                <a href="hall_of_fame.html" class="mobile-nav-link hover:text-secondary transition-colors py-2 px-4 rounded-full bg-gradient-to-r from-yellow-500/20 to-yellow-600/30 border border-yellow-500/40 text-yellow-400">
+                    <span class="en">Hall of Fame</span>
+                    <span class="zh hidden">名人堂</span>
                 </a>
                 <button id="mobileLangToggle" class="flex items-center space-x-1 px-3 py-2 rounded-full border border-primary/30 hover:border-secondary transition-colors w-fit">
                     <span class="en">中文</span>
@@ -224,6 +234,11 @@
                                 <span class="en">Our community is built on the principles of fun, inclusivity, and financial empowerment. Anyone can join the XDOG movement, regardless of their background or experience with cryptocurrency.</span>
                                 <span class="zh hidden">我们的社区建立在乐趣、包容性和financial empowerment的原则之上。无论背景如何，无论是否有加密货币经验，任何人都可以加入XDOG运动。</span>
                             </p>
+                            
+                            <p>
+                                <span class="en">After XDOG created a sensation on the X Layer, a storm of "xxxDOG" tokens swept across the blockchain world. Imitators and followers emerged on various blockchains. This storm once again focused the crypto world's attention on XDOG, with all chains converging to the X Layer and all DOGs following XDOG.</span>
+                                <span class="zh hidden">当XDOG在X layer上掀起热潮后，区块链上掀起了一阵xxxDOG的风暴，各个公链上的模仿者跟随者层出不穷，这场风暴让加密世界再一次将目光聚焦XDOG，万链归于X layer，万DOG追随于XDOG。</span>
+                            </p>
                         </div>
                         
                         <div class="mt-8 flex items-center space-x-6">
@@ -232,7 +247,7 @@
                                     <i class="fa fa-users text-primary text-xl"></i>
                                 </div>
                                 <div>
-                                    <div class="font-bold text-2xl">12K+</div>
+                                    <div class="font-bold text-2xl">13K+</div>
                                     <div class="text-gray-400 text-sm">
                                         <span class="en">Community</span>
                                         <span class="zh hidden">社区成员</span>
@@ -245,7 +260,7 @@
                                     <i class="fa fa-exchange text-primary text-xl"></i>
                                 </div>
                                 <div>
-                                    <div class="font-bold text-2xl">10K+</div>
+                                    <div class="font-bold text-2xl">13.5K+</div>
                                     <div class="text-gray-400 text-sm">
                                         <span class="en">Holders</span>
                                         <span class="zh hidden">持有地址</span>
@@ -1004,19 +1019,7 @@
         //     }
         // });
         
-        // 语言切换功能
-        const langToggle = document.getElementById('langToggle');
-        const mobileLangToggle = document.getElementById('mobileLangToggle');
-        const enElements = document.querySelectorAll('.en');
-        const zhElements = document.querySelectorAll('.zh');
-        
-        function toggleLanguage() {
-            enElements.forEach(el => el.classList.toggle('hidden'));
-            zhElements.forEach(el => el.classList.toggle('hidden'));
-        }
-        
-        langToggle.addEventListener('click', toggleLanguage);
-        mobileLangToggle.addEventListener('click', toggleLanguage);
+        // 注意：语言切换功能已移至 language-sync.js 统一管理
         
         // 为社区span元素添加点击事件，跳转到背景网格div
         const communitySpan = document.getElementById('communitySpan');
