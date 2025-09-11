@@ -149,8 +149,8 @@
                     
                     <button id="back-button" class="back-button px-4 py-2 rounded-full bg-dark-lighter border border-primary/30 text-primary hover:bg-primary/20 transition duration-300 flex items-center">
                         <i class="fa fa-arrow-left mr-2"></i>
-                        <span class="zh">返回名人堂</span>
-                        <span class="en hidden">Back to Hall of Fame</span>
+                        <span class="zh">返回首页</span>
+                        <span class="en hidden">Back to Homepage</span>
                     </button>
                 </div>
             </div>
@@ -335,7 +335,7 @@
     <script>
         // 返回按钮功能
         document.getElementById('back-button').addEventListener('click', function() {
-            window.history.back();
+            window.location.href = 'index.html';
         });
 
         // 页面加载动画
